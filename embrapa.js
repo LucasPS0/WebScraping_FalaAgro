@@ -6,7 +6,7 @@ const cron = require("node-cron");
 (async () => {
   const url = "https://www.embrapa.br/busca-de-noticias";
 
-  const uri = "mongodb://127.0.0.1/test/noticias";
+  const uri = "mongodb://127.0.0.1/";
   const client = new MongoClient(uri);
 
   const scrapEmbrapa = async () => {
