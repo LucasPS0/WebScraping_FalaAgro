@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Notícias</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Notícias</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Resumo</th>
+          <th>Link</th>
+          <th>Texto da Notícia</th>
+          <th>Data de Publicação</th>
+          <th>Legenda da Imagem Principal</th>
+          <th>Fonte da Imagem Principal</th>
+          <th>Autor</th>
+        </tr>
+      </thead>
+      <tbody id="noticias">
+        <!-- Os dados da API serão inseridos aqui dinamicamente -->
+      </tbody>
+    </table>
+    <script>
+      alert('ola mundo')
+      // Use fetch() para fazer uma chamada API e obter os dados
+fetch('http://localhost:3000/noticia')
+  .then(response => response.json())
+  .then(data => {
+    // Use o DOM para inserir dinamicamente os dados na tabela
+    const noticias = document.getElementById('noticias');
+    data.forEach(noticia => {
+      const tr = document.createElement('tr');
+      const tdTitulo = document.createElement('td');
+      const tdResumo = document.createElement('td');
+      const tdLink = document.createElement('td');
+      const tdTextoNoticia = document.createElement('td');
+      const tdDataPublicacao = document.createElement('td');
+      const tdLegendaImagemPrincipal = document.createElement('td');
+      const tdFonteImagemPrincipal = document.createElement('td');
+      const tdAutor = document.createElement('td');
+      tdTitulo.textContent = noticia.titulo;
+      tdResumo.textContent = noticia.resumo;
+      tdLink.textContent = noticia.link;
+      tdTextoNoticia.textContent = noticia.textoNoticia;
+      tdDataPublicacao.textContent = noticia.dataPublicacao;
+      tdLegendaImagemPrincipal.textContent = noticia.legendaImagemPrincipal;
+      tdFonteImagemPrincipal.textContent = noticia.fonteImagemPrincipal;
+      tdAutor.textContent = noticia.autor;
+      tr.appendChild(tdTitulo);
+      tr.appendChild(tdResumo);
+      tr.appendChild(tdLink);
+      tr.appendChild(tdTextoNoticia);
+      tr.appendChild(tdDataPublicacao);
+      tr.appendChild(tdLegendaImagemPrincipal);
+      tr.appendChild(tdFonteImagemPrincipal);
+      tr.appendChild(tdAutor);
+      noticias.appendChild(tr);
+    });
+  })
+  .catch(error => console.error('Erro ao obter as notícias:', error));
+
+    </script>
+  </body>
+</html>

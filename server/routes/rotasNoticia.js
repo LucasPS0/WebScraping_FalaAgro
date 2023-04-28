@@ -6,6 +6,9 @@ const Noticia = require('../model/Noticia')
 
 //LEITURA
 router.get("/", async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   try {
     const noticias = await Noticia.find();
     res.status(200).json(noticias);
