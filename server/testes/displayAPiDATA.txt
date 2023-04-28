@@ -1,0 +1,21 @@
+// Make an API call to your backend API
+fetch('http://your-backend-api-url.com/data')
+  .then(response => response.json())
+  .then(data => {
+    // Extract the data you need to display from the API response
+    const items = data.items;
+    
+    // Create HTML elements to hold the data
+    const list = document.createElement('ul');
+    
+    // Use a loop to create and populate HTML elements for each item in the data
+    items.forEach(item => {
+      const listItem = document.createElement('li');
+      listItem.textContent = item.name;
+      list.appendChild(listItem);
+    });
+    
+    // Append the HTML elements to your web page
+    document.body.appendChild(list);
+  })
+  .catch(error => console.error(error));
