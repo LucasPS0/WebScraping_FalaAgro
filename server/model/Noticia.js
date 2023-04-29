@@ -16,7 +16,7 @@ const Noticia = mongoose.model('Noticia', {
     
   },
   textoNoticia: {
-    type: String,
+    type: [],
   },
   dataPublicacao: {
     type: String,

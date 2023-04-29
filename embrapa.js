@@ -33,9 +33,21 @@ const cron = require("node-cron");
         const { data: noticiaData } = await axios.get(link);
         const $noticia = cheerio.load(noticiaData);
         // encontra o texto da notícia
+
+
         const textoNoticia = $noticia(
-          ".conteudo-noticia .texto-noticia-oculto"
-        ).text();
+          ".texto-noticia > p"
+        ).map((index, element) => {
+          return $noticia(element).text();
+        }).get();
+
+             /* if(textoNoticia[0] === '') {
+                textoNoticia = $noticia('.texto-noticia > div').map((index, element) => {
+                  return $noticia(element).text();
+                }).get();
+              } */
+
+      
 
         // encontra a imagem principal
         const imagemPrincipal = $noticia(".imagem-principal img[src]").attr(
@@ -149,7 +161,7 @@ const cron = require("node-cron");
     }
   };
 
-  cron.schedule("*/5 * * * * *", async () => {
+  cron.schedule("*/10 * * * * *", async () => {
     await scrapEmbrapa();
   });
 })();
