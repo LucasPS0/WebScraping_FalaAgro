@@ -1,0 +1,208 @@
+main .grid{
+    display: grid;
+    grid-gap: 10px;
+    padding-top: 50px;
+    width: 1000px;
+    height: 500px;
+    margin: auto;
+  }
+
+main .grid-item {
+    border-radius: 10px;
+  }
+
+
+
+.grid > .conteudo1{
+    grid-row: 1 / span 2;
+    background-image: url(/img/conteudo_index/conteudo1.jpg); 
+    background-size: cover; 
+    filter: grayscale(0%);
+}
+.grid > .conteudo2{
+    grid-row: 1;
+    background-image: url(/img/conteudo_index/conteudo2.jpg); 
+    background-size: cover; 
+    filter: grayscale(0%);
+}
+.grid > .conteudo2 p{
+    height: 85%;
+}
+
+.grid > .conteudo3{
+    grid-row: 2;
+    background-image: url(/img/conteudo_index/conteudo3.jpg); 
+    background-size: cover; 
+    filter: grayscale(0%);
+    
+}
+.grid > .conteudo3 p{
+    height: 85%
+}
+
+
+.grid-item > .filtro{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.90));
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.grid > .grid-item .title{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    font-size: 2rem;
+    text-align: start;
+    align-content: end;
+    margin: 0px 1rem;
+    color: #7FE613;
+    font-weight: bolder;
+}
+
+.grid > .grid-item .title, .fonte{
+    user-select: none;
+    cursor: pointer;
+}
+
+.grid > .grid-item .fonte{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    font-size: 1rem;
+    text-align: start;
+    align-content: end;
+    margin: 0px 1rem;
+    color: #7FE613;
+    font-weight: bolder;
+    height: 95%;
+}
+
+.grid > .conteudo1 .title{
+    height: 90%;
+    
+}
+
+.grid > .grid-item img{
+    width: 510px;
+}
+
+.grid > .conteudo {
+    display: flex;
+    padding: 0;
+    height: 250px;
+}
+
+.grid > .conteudo > .imgpost{
+    background-size: cover;
+    background-position: center;
+    min-width: 350px;
+    min-height: 250px;
+    border-radius: 15px;
+}
+
+.post1 > .imgpost{
+    background-image: url(/img/conteudo_index/conteudo4.jpg);
+}
+
+.post2 > .imgpost{
+    background-image: url(/img/conteudo_index/conteudo5.jpg);
+}
+
+.conteudo > .conteudopost{
+    display: flex;
+    flex-direction: column;
+    color: #3D221B;
+    margin: 15px;
+    justify-content: space-around;
+    user-select: none;
+    cursor: pointer;
+}
+
+.conteudo > .conteudopost .title{
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.conteudo > .conteudopost .sub{
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.conteudo > .conteudopost .fonte{
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.grid:nth-child(2){
+    margin-bottom: 50px;
+}
+
+
+
+@media (max-width:1100px) {
+
+    /* GRID */
+    main .grid{
+        width: 80%;
+        height: 400px;
+      }
+
+      /* CONTEUDO PRICIPAL */
+      .grid > .grid-item .title{
+        font-size: 1.5rem;
+    }
+    .grid > .grid-item .fonte{
+        font-size: 1rem;
+    }
+    .grid > .conteudo1 .title{
+        height: 89%;
+    }
+
+    .grid > .conteudo2 .title{
+        height: 80%;
+    }
+    .grid > .conteudo3 .title{
+        height: 80%;
+    }
+
+      /* CONTEUDOS COLUNA */
+    .conteudo > .conteudopost .title{
+        font-size: 1.3rem;
+    }
+    
+    .conteudo > .conteudopost .sub{
+        font-size: 1.1rem;
+    }
+    
+    .conteudo > .conteudopost .fonte{
+        font-size: 1rem;
+    }
+    .grid > .conteudo > .imgpost{
+        min-width: 300px;
+        min-height: 200px;
+    }
+    .grid > .conteudo {
+        display: flex;
+        padding: 0;
+        height: 200px;
+    }
+}
+
+@media (max-width:900px) {
+    main .grid{
+        width: 90%;
+        height: 400px;
+      }
+}
+
+@media (min-width:1920px) {
+    main .grid{
+        width: 70%;
+      }
+    main .gridprincipal{
+        height: 700px;
+    }
+}
