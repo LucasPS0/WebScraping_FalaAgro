@@ -42,44 +42,34 @@
       </tbody>
     </table>
     <script>
-      alert('ola mundo')
-      // Use fetch() para fazer uma chamada API e obter os dados
-fetch('http://localhost:3000/noticia')
-  .then(response => response.json())
-  .then(data => {
-    // Use o DOM para inserir dinamicamente os dados na tabela
-    const noticias = document.getElementById('noticias');
-    data.forEach(noticia => {
-      const tr = document.createElement('tr');
-      const tdTitulo = document.createElement('td');
-      const tdResumo = document.createElement('td');
-      const tdLink = document.createElement('td');
-      const tdTextoNoticia = document.createElement('td');
-      const tdDataPublicacao = document.createElement('td');
-      const tdLegendaImagemPrincipal = document.createElement('td');
-      const tdFonteImagemPrincipal = document.createElement('td');
-      const tdAutor = document.createElement('td');
-      tdTitulo.textContent = noticia.titulo;
-      tdResumo.textContent = noticia.resumo;
-      tdLink.textContent = noticia.link;
-      tdTextoNoticia.textContent = noticia.textoNoticia;
-      tdDataPublicacao.textContent = noticia.dataPublicacao;
-      tdLegendaImagemPrincipal.textContent = noticia.legendaImagemPrincipal;
-      tdFonteImagemPrincipal.textContent = noticia.fonteImagemPrincipal;
-      tdAutor.textContent = noticia.autor;
-      tr.appendChild(tdTitulo);
-      tr.appendChild(tdResumo);
-      tr.appendChild(tdLink);
-      tr.appendChild(tdTextoNoticia);
-      tr.appendChild(tdDataPublicacao);
-      tr.appendChild(tdLegendaImagemPrincipal);
-      tr.appendChild(tdFonteImagemPrincipal);
-      tr.appendChild(tdAutor);
-      noticias.appendChild(tr);
-    });
-  })
-  .catch(error => console.error('Erro ao obter as notícias:', error));
+      function createTableCell(content) {
+        const td = document.createElement('td');
+        td.textContent = content;
+        return td;
+      }
 
+      function fetchNews() {
+        fetch('http://localhost:3000/noticia')
+          .then(response => response.json())
+          .then(data => {
+            const noticias = document.getElementById('noticias');
+            data.forEach(noticia => {
+              const tr = document.createElement('tr');
+              tr.appendChild(createTableCell(noticia.titulo));
+              tr.appendChild(createTableCell(noticia.resumo));
+              tr.appendChild(createTableCell(noticia.link));
+              tr.appendChild(createTableCell(noticia.textoNoticia));
+              tr.appendChild(createTableCell(noticia.dataPublicacao));
+              tr.appendChild(createTableCell(noticia.legendaImagemPrincipal));
+              tr.appendChild(createTableCell(noticia.fonteImagemPrincipal));
+              tr.appendChild(createTableCell(noticia.autor));
+              noticias.appendChild(tr);
+            });
+          })
+          .catch(error => console.error('Erro ao obter as notícias:', error));
+      }
+
+      fetchNews();
     </script>
   </body>
 </html>
