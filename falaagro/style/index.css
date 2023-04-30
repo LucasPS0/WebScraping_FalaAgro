@@ -206,3 +206,21 @@ main .grid-item {
         height: 700px;
     }
 }
+
+.classenova{
+    background-size: cover;
+    min-width: 350px;
+    min-height: 250px;
+    background-position: center center;
+    border-radius: 15px;
+}
+
+.conteudo2{
+    display: flex;
+    flex-direction: column;
+    color: rgb(61, 34, 27);
+    justify-content: space-around;
+    user-select: none;
+    cursor: pointer;
+    margin: 15px;
+}

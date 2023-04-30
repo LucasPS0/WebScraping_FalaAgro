@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fala Agro</title>
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="shortcut icon" href="./img/icons/simbolo-falaagro-1.png" type="image/x-icon">
+</head>
+<body>
+    
+    <header class="nav">
+        <div class="logo">
+            <img src="" alt="logo"> imagem principal
+        </div>
+
+        <div class="search">
+            <input type="text"><p>Search...</p>
+        </div>
+    </header>
+
+    <main class="conteudo grid-container">
+        <article class="grid gridprincipal">
+            <div class="conteudo1 grid-item"><div class="filtro"><p class="title"> <a href="./pages/conteudo.html">Produção de açúcar na China é a menor em 7 anos, diz relatório</a></p> <p class="fonte">Brasil Agro &#9989;</p></div></div>
+            <div class="conteudo2 grid-item"><div class="filtro"><p class="title">Algas transformam oceanos na nova fronteira da agricultura</p><p class="fonte">Brasil Agro &#9989;</p></div></div>
+            <div class="conteudo3 grid-item"><div class="filtro"><p class="title">Plantio de hortaliças na areia vem gerando bons resultados a agricultores paulistas</p><p class="fonte">Brasil Agro &#9989;</p></div></div>
+        </article>
+        
+        <article class="grid" id="posts">
+
+ 
+
+        </article>
+    </main>
+
+    <script>
+        const endpoint = 'http://localhost:3000/noticia';
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => {
+                const postsContainer = document.querySelector('#posts');
+
+                data.forEach(postData => {
+
+                    const post = document.createElement('div');
+                    post.className = 'conteudo grid-post post1';
+
+                    const imgpost = document.createElement('img');
+                    imgpost.className = 'imgpost classenova';
+                    imgpost.src = postData.imagemCompleta;
+                    
+                    const conteudopost = document.createElement('div');
+                    conteudopost.className = 'conteudopost conteudo2';
+
+                    const title = document.createElement('p');
+                    title.className = 'title';
+                    title.textContent = postData.titulo;
+
+                    const sub = document.createElement('p');
+                    sub.className = 'sub';
+                    sub.textContent = postData.resumo;
+
+                    const fonte = document.createElement('p');
+                    fonte.className = 'fonte';
+                    fonte.innerHTML =  postData.dataPublicacao;
+
+                    conteudopost.appendChild(title);
+                    conteudopost.appendChild(sub);
+                    conteudopost.appendChild(fonte);
+
+                    post.appendChild(imgpost);
+                    post.appendChild(conteudopost);
+
+                    postsContainer.appendChild(post);
+                });
+            })
+            .catch(error => console.error(error));
+    </script>
+
+</body>
+</html>
