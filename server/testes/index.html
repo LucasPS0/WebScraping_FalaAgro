@@ -42,9 +42,13 @@
       </tbody>
     </table>
     <script>
-      function createTableCell(content) {
+      function createTableCell(content, isHTML = false) {
         const td = document.createElement('td');
-        td.textContent = content;
+        if (isHTML) {
+          td.innerHTML = content;
+        } else {
+          td.textContent = content;
+        }
         return td;
       }
 
@@ -58,10 +62,10 @@
               tr.appendChild(createTableCell(noticia.titulo));
               tr.appendChild(createTableCell(noticia.resumo));
               tr.appendChild(createTableCell(noticia.link));
-              tr.appendChild(createTableCell(noticia.textoNoticia));
+              tr.appendChild(createTableCell(noticia.textoNoticia, true));
               tr.appendChild(createTableCell(noticia.dataPublicacao));
-              tr.appendChild(createTableCell(noticia.legendaImagemPrincipal));
-              tr.appendChild(createTableCell(noticia.fonteImagemPrincipal));
+              tr.appendChild(createTableCell(noticia.legendaimagemPrincipal));
+              tr.appendChild(createTableCell(noticia.fonteimagemPrincipal));
               tr.appendChild(createTableCell(noticia.autor));
               noticias.appendChild(tr);
             });

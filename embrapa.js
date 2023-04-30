@@ -35,19 +35,12 @@ const cron = require("node-cron");
         // encontra o texto da notícia
 
 
-        const textoNoticia = $noticia(
-          ".texto-noticia > p"
-        ).map((index, element) => {
-          return $noticia(element).text();
-        }).get();
-
-             /* if(textoNoticia[0] === '') {
-                textoNoticia = $noticia('.texto-noticia > div').map((index, element) => {
-                  return $noticia(element).text();
-                }).get();
-              } */
-
-      
+        
+        const textoNoticia = $noticia(".texto-noticia").html();
+        
+        
+    
+  
 
         // encontra a imagem principal
         const imagemPrincipal = $noticia(".imagem-principal img[src]").attr(
@@ -55,20 +48,19 @@ const cron = require("node-cron");
         );
 
         const imagemCompleta = "https://www.embrapa.br/" + imagemPrincipal;
-        console.log(imagemCompleta);
-
+      
         const legendaimagemPrincipal = $noticia(
           ".legenda-imagem-principal"
         ).text();
-        console.log(legendaimagemPrincipal);
+      
 
         const fonteimagemPrincipal = $noticia(
           ".fonte-imagem-principal"
         ).text();
-        console.log(fonteimagemPrincipal);
+     
 
         const autor = $noticia(".autor").text();
-        console.log(autor);
+       
 
 
 
@@ -88,6 +80,7 @@ const cron = require("node-cron");
             legendaimagemPrincipal: legendaimagemPrincipal,
             fonteimagemPrincipal: fonteimagemPrincipal,
             autor: autor,
+          
 
           };
 
@@ -110,19 +103,20 @@ const cron = require("node-cron");
             legendaimagemPrincipal: existinglegendaimagemPrincipal,
             fonteimagemPrincipal: existingfonteimagemPrincipal,
             autor: existingautor,
+         
 
           } = existingNoticia;
 
           const camposModificados =
-            existingTitulo !== titulo ||
-            existingResumo !== resumo ||
-            existingTextoNoticia !== textoNoticia ||
-            existingImagemCompleta !== imagemCompleta ||
-            existingdataPublicacao !== dataPublicacao ||
-            existinglegendaimagemPrincipal !== legendaimagemPrincipal ||
-            existingfonteimagemPrincipal !== fonteimagemPrincipal ||
-            existingautor !== autor;
-
+          existingTitulo !== titulo ||
+          existingResumo !== resumo ||
+          existingTextoNoticia !== textoNoticia||
+          existingImagemCompleta !== imagemCompleta ||
+          existingdataPublicacao !== dataPublicacao ||
+          existinglegendaimagemPrincipal !== legendaimagemPrincipal ||
+          existingfonteimagemPrincipal !== fonteimagemPrincipal ||
+          existingautor !== autor 
+          
           if (camposModificados) {
             // Se houve alteração nos campos, atualiza a notícia no banco de dados
             await collection.updateMany(
