@@ -8,24 +8,24 @@
     <link rel="stylesheet" href="./style/index.css">
     <link rel="stylesheet" href="./style/reset.css">
     <link rel="shortcut icon" href="./img/icons/simbolo-falaagro-1.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <header class="nav">
         <div class="logo">
-            <img src="" alt="logo"> imagem principal
+            <img src="./img/logo-falaagro-horizontal.png" alt="logo">
         </div>
-
         <div class="search">
             <input type="text"><p>Search...</p>
         </div>
     </header>
 
-    <main class="conteudo grid-container">
-        <article class="grid gridprincipal">
-            <div class="conteudo1 grid-item"><div class="filtro"><p class="title"> <a href="./pages/conteudo.html">Produção de açúcar na China é a menor em 7 anos, diz relatório</a></p> <p class="fonte">Brasil Agro &#9989;</p></div></div>
-            <div class="conteudo2 grid-item"><div class="filtro"><p class="title">Algas transformam oceanos na nova fronteira da agricultura</p><p class="fonte">Brasil Agro &#9989;</p></div></div>
-            <div class="conteudo3 grid-item"><div class="filtro"><p class="title">Plantio de hortaliças na areia vem gerando bons resultados a agricultores paulistas</p><p class="fonte">Brasil Agro &#9989;</p></div></div>
+    <main class="conteudo grid-container" id="mainContainer">
+        <article class="grid gridprincipal" id="containerPrincipal">
+        
         </article>
         
         <article class="grid" id="posts">
@@ -39,45 +39,66 @@
         const endpoint = 'http://localhost:3000/noticia';
 
         fetch(endpoint)
-            .then(response => response.json())
-            .then(data => {
-                const postsContainer = document.querySelector('#posts');
+    .then(response => response.json())
+    .then(data => {
+        const containerPrincipal = document.querySelector('#containerPrincipal');
+        const postsContainer = document.querySelector('#posts');
 
-                data.forEach(postData => {
+        data.forEach((postData, index) => {
 
-                    const post = document.createElement('div');
-                    post.className = 'conteudo grid-post post1';
+            const divMain = document.createElement('div');
+            divMain.className = 'conteudo1 grid-item';
 
-                    const imgpost = document.createElement('img');
-                    imgpost.className = 'imgpost classenova';
-                    imgpost.src = postData.imagemCompleta;
-                    
-                    const conteudopost = document.createElement('div');
-                    conteudopost.className = 'conteudopost conteudo2';
+            const divMainTitle = document.createElement('p');
+            divMainTitle.className = 'title';
+            divMainTitle.textContent = postData.titulo
 
-                    const title = document.createElement('p');
-                    title.className = 'title';
-                    title.textContent = postData.titulo;
+            const divMainfoto = document.createElement('img');
+            divMainfoto.className = 'conteudo1';
+            divMainfoto.src = postData.imagemCompleta;
 
-                    const sub = document.createElement('p');
-                    sub.className = 'sub';
-                    sub.textContent = postData.resumo;
+            const post = document.createElement('div');
+            post.className = 'conteudo grid-post post1';
 
-                    const fonte = document.createElement('p');
-                    fonte.className = 'fonte';
-                    fonte.innerHTML =  postData.dataPublicacao;
+            const imgpost = document.createElement('img');
+            imgpost.className = 'imgpost classenova';
+            imgpost.src = postData.imagemCompleta;
 
-                    conteudopost.appendChild(title);
-                    conteudopost.appendChild(sub);
-                    conteudopost.appendChild(fonte);
+            const conteudopost = document.createElement('div');
+            conteudopost.className = 'conteudopost conteudo2';
 
-                    post.appendChild(imgpost);
-                    post.appendChild(conteudopost);
+            const title = document.createElement('p');
+            title.className = 'title';
+            title.textContent = postData.titulo;
 
-                    postsContainer.appendChild(post);
-                });
-            })
-            .catch(error => console.error(error));
+            const sub = document.createElement('p');
+            sub.className = 'sub';
+            sub.innerHTML = postData.resumo;
+
+            const fonte = document.createElement('p');
+            fonte.className = 'fonte';
+            fonte.innerHTML = postData.dataPublicacao;
+
+            conteudopost.appendChild(title);
+            conteudopost.appendChild(sub);
+            conteudopost.appendChild(fonte);
+            
+            post.appendChild(imgpost);
+            post.appendChild(conteudopost);
+            divMain.appendChild(divMainTitle);
+            divMain.appendChild(divMainfoto);
+
+
+            if (index < 3) {
+                containerPrincipal.appendChild(divMain);
+                
+            } else {
+                postsContainer.appendChild(post);
+            }
+        });
+    })
+    .catch(error => console.error(error));
+
     </script>
 
 </body>

@@ -2,30 +2,36 @@ main .grid{
     display: grid;
     grid-gap: 10px;
     padding-top: 50px;
-    width: 1000px;
-    height: 500px;
+    width: 90%;
+    height: 690px;
     margin: auto;
+    
   }
 
 main .grid-item {
     border-radius: 10px;
+   
   }
 
 
 
 .grid > .conteudo1{
     grid-row: 1 / span 2;
-    background-image: url(/img/conteudo_index/conteudo1.jpg); 
-    background-size: cover; 
     filter: grayscale(0%);
+    margin-left: 50px;
+   
+    
 }
+
 .grid > .conteudo2{
     grid-row: 1;
     background-image: url(/img/conteudo_index/conteudo2.jpg); 
     background-size: cover; 
     filter: grayscale(0%);
+    
 }
 .grid > .conteudo2 p{
+    
     height: 85%;
 }
 
@@ -39,6 +45,7 @@ main .grid-item {
 .grid > .conteudo3 p{
     height: 85%
 }
+
 
 
 .grid-item > .filtro{
@@ -64,6 +71,8 @@ main .grid-item {
 .grid > .grid-item .title, .fonte{
     user-select: none;
     cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
 }
 
 .grid > .grid-item .fonte{
@@ -81,18 +90,26 @@ main .grid-item {
 }
 
 .grid > .conteudo1 .title{
-    height: 90%;
+    height: 75%;
+    
     
 }
 
 .grid > .grid-item img{
-    width: 510px;
+    width: 100%;
+background-size: cover;
+background-position: center;
+min-width: 500px;
+height: 400px;
+border-radius: 15px;
+
 }
 
 .grid > .conteudo {
     display: flex;
     padding: 0;
     height: 250px;
+    margin-bottom: 25px;
 }
 
 .grid > .conteudo > .imgpost{
@@ -101,6 +118,7 @@ main .grid-item {
     min-width: 350px;
     min-height: 250px;
     border-radius: 15px;
+    
 }
 
 .post1 > .imgpost{
@@ -124,22 +142,33 @@ main .grid-item {
 .conteudo > .conteudopost .title{
     font-weight: bolder;
     font-size: 1.5rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
 }
 
 .conteudo > .conteudopost .sub{
     font-weight: 300;
     font-size: 1.2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
 }
 
 .conteudo > .conteudopost .fonte{
     font-weight: 300;
     font-size: 1.2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }
 
 .grid:nth-child(2){
     margin-bottom: 50px;
 }
 
+#posts {
+   
+    height: 100%;
+    
+}
 
 
 @media (max-width:1100px) {
@@ -198,14 +227,7 @@ main .grid-item {
       }
 }
 
-@media (min-width:1920px) {
-    main .grid{
-        width: 70%;
-      }
-    main .gridprincipal{
-        height: 700px;
-    }
-}
+
 
 .classenova{
     background-size: cover;
