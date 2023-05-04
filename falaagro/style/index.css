@@ -4,24 +4,50 @@ main .grid{
     padding-top: 50px;
     width: 90%;
     height: 690px;
-    margin: auto;
-    
+
+  padding: 50px 20px 20px 20px;
   }
 
 main .grid-item {
-    border-radius: 10px;
-   
+    border-radius: 20px;
+   position: relative;
+
+
   }
 
 
 
-.grid > .conteudo1{
+  .grid > .conteudo1{
     grid-row: 1 / span 2;
     filter: grayscale(0%);
-    margin-left: 50px;
-   
-    
+    display: flex;
+    width: fit-content;
+    margin-top: 20px; /* Adiciona uma margem superior */
 }
+
+.grid-item .conteudo1-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+    border-radius: 20px;
+   
+}
+
+.grid-item .conteudo1-filter:hover {
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+#containerPrincipal {
+    margin: auto;
+}
+
+
 
 .grid > .conteudo2{
     grid-row: 1;
@@ -47,14 +73,6 @@ main .grid-item {
 }
 
 
-
-.grid-item > .filtro{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.90));
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-}
-
 .grid > .grid-item .title{
     position: absolute;
     display: flex;
@@ -64,12 +82,12 @@ main .grid-item {
     text-align: start;
     align-content: end;
     margin: 0px 1rem;
-    color: #7FE613;
+    color:#67B910;
     font-weight: bolder;
 }
 
 .grid > .grid-item .title, .fonte{
-    user-select: none;
+    
     cursor: pointer;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
@@ -90,20 +108,22 @@ main .grid-item {
 }
 
 .grid > .conteudo1 .title{
-    height: 75%;
-    
-    
+align-self: center;
+padding-top:300px;
 }
 
 .grid > .grid-item img{
-    width: 100%;
+    
 background-size: cover;
 background-position: center;
-min-width: 500px;
+width: 450px;
 height: 400px;
-border-radius: 15px;
+border-radius: 20px;
+padding-bottom: 20px;
 
 }
+
+
 
 .grid > .conteudo {
     display: flex;
@@ -135,7 +155,7 @@ border-radius: 15px;
     color: #3D221B;
     margin: 15px;
     justify-content: space-around;
-    user-select: none;
+   
     cursor: pointer;
 }
 
@@ -169,6 +189,15 @@ border-radius: 15px;
     height: 100%;
     
 }
+
+.search > img {
+    width: 20px;
+    position: relative;
+    top: 32px;
+    left: 220px;
+    
+}
+
 
 
 @media (max-width:1100px) {
@@ -242,7 +271,6 @@ border-radius: 15px;
     flex-direction: column;
     color: rgb(61, 34, 27);
     justify-content: space-around;
-    user-select: none;
     cursor: pointer;
     margin: 15px;
 }
