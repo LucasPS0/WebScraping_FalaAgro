@@ -17,6 +17,27 @@ router.get("/", async (req, res) => {
   }
 });
 
+//LEITURA DO RESUMO DA NOTICIA
+router.get("/resumo", async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  try {
+    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao');
+
+    const noticiasJSON = noticias.map(noticia => ({
+      titulo: noticia.titulo,
+      imagemCompleta: noticia.imagemCompleta,
+      resumo: noticia.resumo,
+      dataPublicacao: noticia.dataPublicacao
+    }));
+
+    res.status(200).json(noticiasJSON);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
 
 //LEITURA POR ID
 router.get('/:id', async(req, res) => {
