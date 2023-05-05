@@ -19,7 +19,8 @@
             <img src="./img/logo-falaagro-horizontal.png" alt="logo">
         </div>
         <div class="search">
-            <input type="text"><p>Search...</p>
+            <img src="/falaagro/img/icons/Fa-Team-Fontawesome-FontAwesome-Magnifying-Glass.svg" alt="search">
+            <input type="text" placeholder="Pesquisar...">
         </div>
     </header>
 
@@ -44,6 +45,8 @@
         const containerPrincipal = document.querySelector('#containerPrincipal');
         const postsContainer = document.querySelector('#posts');
 
+        data.reverse();
+
         data.forEach((postData, index) => {
 
             const divMain = document.createElement('div');
@@ -56,6 +59,10 @@
             const divMainfoto = document.createElement('img');
             divMainfoto.className = 'conteudo1';
             divMainfoto.src = postData.imagemCompleta;
+
+            const divFilter = document.createElement('div');
+            divFilter.className = 'conteudo1-filter';
+
 
             const post = document.createElement('div');
             post.className = 'conteudo grid-post post1';
@@ -87,6 +94,7 @@
             post.appendChild(conteudopost);
             divMain.appendChild(divMainTitle);
             divMain.appendChild(divMainfoto);
+            divMain.appendChild(divFilter);
 
 
             if (index < 3) {

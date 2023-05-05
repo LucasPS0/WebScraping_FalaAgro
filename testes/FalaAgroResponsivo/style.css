@@ -1,0 +1,179 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    
+}
+
+header {
+    background-color: hsl(0, 0%, 98%);
+    padding: 20px;
+    margin-bottom: 5em;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+header > img {
+    width: 15vw;
+    margin-left: 17px;
+}
+
+header > input {
+  
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 30px;
+        align-self: center;
+        width: 15vw;
+        margin-right: 25px;
+      
+      
+}
+
+article {
+	
+	padding: 20px;
+	margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    color:#67B910;
+   
+}
+
+article  img {
+    
+   width: 100%;
+   height: 350px;
+   margin: auto;
+   display: block;
+   border-radius: 5px;
+   padding-bottom: 15px;
+}
+
+.containerPrincipal {
+    padding-bottom: 5em;
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    padding: 20px;
+    grid-gap: 20px;
+    
+  }
+
+
+
+  /* Noticias Secundarias */
+  
+.ArticleSecundario {
+    
+    display: flex;
+    align-self: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+
+.ArticleSecundario > img {
+    width: 20vw;
+    height:30vh;
+   
+
+}
+
+.containerSecundario{
+
+    flex-direction: column;
+    display: flex;
+	padding: 20px;
+	margin-bottom: 20px;
+	grid-gap: 10px;
+    padding-top: 50px;
+    
+}
+
+
+.conteudoNoticia {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    background-color: hsl(0, 0%, 98%); 
+    height: 8vh;
+    line-height: 4;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+
+
+
+@media (max-width: 810px) {
+
+
+ header > img {
+ width: 30vw;
+    
+ }
+
+ .containerPrincipal img {
+    background-color: black;
+    height: 250px;
+ }
+
+}
+
+
+
+
+@media (max-width: 992px) {
+
+    .containerPrincipal {
+    grid-template-columns: repeat(2, 1fr);
+  }
+    article img {
+        max-width: 100%;
+    }
+
+    .ArticleSecundario > img {
+        width: 100%;
+    }
+    
+
+}
+
+
+@media (max-width: 576px) {
+    .containerPrincipal {
+        display: block;
+    }
+
+article img {
+        width: 100%;
+        height: 250px;
+    }
+
+    header > img {
+        width: 43vw;
+        height: 6vh;
+        align-self: center;
+    
+    }
+
+    article {
+        padding: 0;
+      
+    }
+
+    .ArticleSecundario {
+        display: block;
+    }
+}
+
