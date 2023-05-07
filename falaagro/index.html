@@ -1,113 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fala Agro</title>
-    <link rel="stylesheet" href="./style/index.css">
-    <link rel="stylesheet" href="./style/reset.css">
-    <link rel="shortcut icon" href="./img/icons/simbolo-falaagro-1.png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./style/reset.css" />
+    <link
+      rel="shortcut icon"
+      href="./img/icons/simbolo-falaagro-1.png"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header class="nav">
-        <div class="logo">
-            <img src="./img/logo-falaagro-horizontal.png" alt="logo">
-        </div>
-        <div class="search">
-            <img src="/falaagro/img/icons/Fa-Team-Fontawesome-FontAwesome-Magnifying-Glass.svg" alt="search">
-            <input type="text" placeholder="Pesquisar...">
-        </div>
+      <div class="logo">
+        <img src="./img/logo-falaagro-horizontal.png" alt="logo" />
+      </div>
+      <div class="search">
+        <img
+          src="/falaagro/img/icons/Fa-Team-Fontawesome-FontAwesome-Magnifying-Glass.svg"
+          alt="search"
+        />
+        <input type="text" placeholder="Pesquisar..." />
+      </div>
     </header>
 
     <main class="conteudo grid-container" id="mainContainer">
-        <article class="grid gridprincipal" id="containerPrincipal">
-        
-        </article>
-        
-        <article class="grid" id="posts">
+      <article class="grid gridprincipal" id="containerPrincipal"></article>
 
- 
-
-        </article>
+      <article class="grid" id="posts"></article>
     </main>
 
     <script>
-        const endpoint = 'http://localhost:3000/noticia';
+      const endpoint = "http://localhost:3000/noticia/resumo";
 
-        fetch(endpoint)
-    .then(response => response.json())
-    .then(data => {
-        const containerPrincipal = document.querySelector('#containerPrincipal');
-        const postsContainer = document.querySelector('#posts');
+      fetch(endpoint)
+        .then((response) => response.json())
+        .then((data) => {
+          const containerPrincipal = document.querySelector(
+            "#containerPrincipal"
+          );
+          const postsContainer = document.querySelector("#posts");
 
-        data.reverse();
+          data.reverse();
 
-        data.forEach((postData, index) => {
+          data.forEach((postData, index) => {
+            const divMain = document.createElement("div");
+            divMain.className = "conteudo1 grid-item";
 
-            const divMain = document.createElement('div');
-            divMain.className = 'conteudo1 grid-item';
+            const divMainTitle = document.createElement("a");
+            divMainTitle.className = "title";
+            divMainTitle.textContent = postData.titulo;
+           
 
-            const divMainTitle = document.createElement('p');
-            divMainTitle.className = 'title';
-            divMainTitle.textContent = postData.titulo
 
-            const divMainfoto = document.createElement('img');
-            divMainfoto.className = 'conteudo1';
+            const divMainfoto = document.createElement("img");
+            divMainfoto.className = "conteudo1";
             divMainfoto.src = postData.imagemCompleta;
 
-            const divFilter = document.createElement('div');
-            divFilter.className = 'conteudo1-filter';
+            const divFilter = document.createElement("div");
+            divFilter.className = "conteudo1-filter";
 
+            const post = document.createElement("div");
+            post.className = "conteudo grid-post post1";
 
-            const post = document.createElement('div');
-            post.className = 'conteudo grid-post post1';
-
-            const imgpost = document.createElement('img');
-            imgpost.className = 'imgpost classenova';
+            const imgpost = document.createElement("img");
+            imgpost.className = "imgpost classenova";
             imgpost.src = postData.imagemCompleta;
 
-            const conteudopost = document.createElement('div');
-            conteudopost.className = 'conteudopost conteudo2';
+            const conteudopost = document.createElement("div");
+            conteudopost.className = "conteudopost conteudo2";
 
-            const title = document.createElement('p');
-            title.className = 'title';
+            const title = document.createElement("p");
+            title.className = "title";
             title.textContent = postData.titulo;
 
-            const sub = document.createElement('p');
-            sub.className = 'sub';
+            const sub = document.createElement("p");
+            sub.className = "sub";
             sub.innerHTML = postData.resumo;
 
-            const fonte = document.createElement('p');
-            fonte.className = 'fonte';
+            const fonte = document.createElement("p");
+            fonte.className = "fonte";
             fonte.innerHTML = postData.dataPublicacao;
+
+   
+            divMainTitle.addEventListener("click", () => {
+
+            window.location.href = './conteudo.html/"";
+
+
+});
+
+
 
             conteudopost.appendChild(title);
             conteudopost.appendChild(sub);
             conteudopost.appendChild(fonte);
-            
+
             post.appendChild(imgpost);
             post.appendChild(conteudopost);
             divMain.appendChild(divMainTitle);
             divMain.appendChild(divMainfoto);
             divMain.appendChild(divFilter);
 
-
             if (index < 3) {
-                containerPrincipal.appendChild(divMain);
-                
+              containerPrincipal.appendChild(divMain);
             } else {
-                postsContainer.appendChild(post);
+              postsContainer.appendChild(post);
             }
-        });
-    })
-    .catch(error => console.error(error));
 
+            
+          });
+
+     
+        })
+        .catch((error) => console.error(error));
     </script>
-
-</body>
+  </body>
 </html>

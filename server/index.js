@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
 
 
 //configurando leitura json
@@ -10,6 +11,7 @@ app.use(
   }),     
 )
 app.use(express.json())
+app.use(cors());
 
 //rotas da api
 const rotasNoticia = require('./routes/rotasNoticia')
