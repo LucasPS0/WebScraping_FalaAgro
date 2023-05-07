@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Noticias</title>
+  </head>
+  <body>
+    <h1>Links para as notícias:</h1>
+    <ul id="noticias-list"></ul>
+    
+    <script>
+      // Make a request to the API to get the noticias array
+      fetch('http://localhost:3000/noticia')
+        .then(response => response.json())
+        .then(data => {
+          // Loop through the noticias array and create a link for each one
+          const noticiasList = document.getElementById('noticias-list');
+          data.forEach(noticia => {
+            const link = document.createElement('a');
+            link.href = `noticias.html?id=${noticia._id}`;
+            link.textContent = noticia.titulo;
+            const item = document.createElement('li');
+            item.appendChild(link);
+            noticiasList.appendChild(item);
+          });
+        });
+    </script>
+  </body>
+</html>
