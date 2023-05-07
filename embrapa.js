@@ -36,7 +36,8 @@ const cron = require("node-cron");
 
 
         
-        const textoNoticia = $noticia(".texto-noticia").html();
+        const textoNoticia = $noticia(".texto-noticia").html().replace(/src="\/documents/g, 'src="https://www.embrapa.br/documents');
+
         
         
     

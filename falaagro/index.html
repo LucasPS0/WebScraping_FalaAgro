@@ -59,8 +59,6 @@
             const divMainTitle = document.createElement("a");
             divMainTitle.className = "title";
             divMainTitle.textContent = postData.titulo;
-           
-
 
             const divMainfoto = document.createElement("img");
             divMainfoto.className = "conteudo1";
@@ -91,15 +89,17 @@
             fonte.className = "fonte";
             fonte.innerHTML = postData.dataPublicacao;
 
-   
             divMainTitle.addEventListener("click", () => {
+              window.location.href = `conteudo.html?id=${postData._id}`;
+            });
 
-            window.location.href = './conteudo.html/"";
+            divMain.addEventListener("click", () => {
+              window.location.href = `conteudo.html?id=${postData._id}`;
+            });
 
-
-});
-
-
+            title.addEventListener("click", () => {
+              window.location.href = `conteudo.html?id=${postData._id}`;
+            });
 
             conteudopost.appendChild(title);
             conteudopost.appendChild(sub);
@@ -116,11 +116,7 @@
             } else {
               postsContainer.appendChild(post);
             }
-
-            
           });
-
-     
         })
         .catch((error) => console.error(error));
     </script>

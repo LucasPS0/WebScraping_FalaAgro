@@ -23,9 +23,10 @@ router.get("/resumo", async (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   try {
-    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao');
+    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao _id');
 
     const noticiasJSON = noticias.map(noticia => ({
+     _id: noticia.id,
       titulo: noticia.titulo,
       imagemCompleta: noticia.imagemCompleta,
       resumo: noticia.resumo,
