@@ -1,8 +1,8 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const fs = require("fs");
-
 const { MongoClient } = require("mongodb");
+
 const uri = "mongodb://127.0.0.1/";
 const client = new MongoClient(uri);
 
@@ -45,8 +45,19 @@ const client = new MongoClient(uri);
       const database = client.db("noticia");
       const collection = database.collection("noticias");
 
-      const result = await collection.insertOne(data);
-      console.log("Dados inseridos no MongoDB com sucesso:", result.insertedId);
+      for (const key in data) {
+        const news = data[key];
+        // Check if news with the same title already exists
+        const existingNews = await collection.findOne({ title: news.title });
+
+        if (existingNews) {
+          console.log(`A notícia "${news.title}" já está no banco de dados.`);
+          continue; // Skip insertion
+        }
+
+        const result = await collection.insertOne(news);
+        console.log("Dados inseridos no MongoDB com sucesso:", result.insertedId);
+      }
     } catch (err) {
       console.error("Erro ao inserir os dados no MongoDB:", err);
     } finally {
