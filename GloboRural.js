@@ -10,7 +10,7 @@ const client = new MongoClient(uri);
   const url = "https://globorural.globo.com/ultimas-noticias/";
 
   const scrapGloboRural = async () => {
-    const dataGloboRural = {};
+    const dataGloboRural = []; // Alteração: agora é um array
 
     async function getHtml() {
       const { data: html } = await axios.get(url);
@@ -28,7 +28,7 @@ const client = new MongoClient(uri);
       const image = $(element).find(".feed-post-figure-link img").attr("src");
 
       // Archive data in an object
-      dataGloboRural[index] = { title, resume, link, publication, theme, image };
+      dataGloboRural.push({ title, resume, link, publication, theme, image }); // Alteração: push para adicionar ao array
     });
 
     fs.writeFile("globoData.json", JSON.stringify(dataGloboRural), (err) => {
@@ -45,8 +45,7 @@ const client = new MongoClient(uri);
       const database = client.db("noticia");
       const collection = database.collection("noticias");
 
-      for (const key in data) {
-        const news = data[key];
+      for (const news of data) {
         // Check if news with the same title already exists
         const existingNews = await collection.findOne({ title: news.title });
 
