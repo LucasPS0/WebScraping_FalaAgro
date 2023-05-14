@@ -63,9 +63,7 @@
             const containerPrincipal = document.querySelector("#containerPrincipal");
             const postsContainer = document.querySelector("#posts");
 
-            // Inverte a ordem dos dados recebidos
-
-
+data.reverse();
             // Itera sobre os dados e cria os elementos HTML para exibir as notícias
             data.forEach((postData, index) => {
               // Cria os elementos HTML para o conteúdo principal
@@ -140,6 +138,7 @@
 
             // Incrementa a variável currentPage para buscar a próxima página de dados
             currentPage++;
+            data.reverse();
             
           })
           .catch((error) => console.error(error));

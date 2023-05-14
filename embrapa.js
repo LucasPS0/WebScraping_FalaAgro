@@ -38,10 +38,8 @@ const moment = require("moment");
         const titulo = $(element).find(".titulo").text().trim();
         const resumo = $(element).find(".detalhes p").text().trim();
 
-        const dataPublicacao = moment(
-          $(element).find(".situacao").text(),
-          "DD/MM/YY"
-        ).toDate();
+        const dataPublicacao = 
+          $(element).find(".situacao").text();
 
         const link = $(element).find("a").attr("href").replace(/\?.*/, "");
 
@@ -83,39 +81,15 @@ const moment = require("moment");
             fonteimagemPrincipal: fonteimagemPrincipal,
             autor: autor,
           };
-
+        
+          // Adiciona a imagem principal, se existir
           if (imagemCompleta) {
             noticia.imagemCompleta = imagemCompleta;
           }
-
-          const noticiasExistentes = await collection
-            .find()
-            .sort({ dataPublicacao: -1 })
-            .toArray();
-
-          let inserted = false;
-
-          for (let i = 0; i <= noticiasExistentes.length; i++) {
-            const noticiaAtual = noticiasExistentes[i];
-
-            if (!noticiaAtual || dataPublicacao > noticiaAtual.dataPublicacao) {
-              await collection.insertOne(noticia, { $position: i });
-
-              console.log(
-                `Notícia "${titulo}" foi adicionada ao banco de dados.`
-              );
-              inserted = true;
-              break;
-            }
-          }
-
-          if (!inserted) {
-            await collection.insertOne(noticia);
-
-            console.log(
-              `Notícia "${titulo}" foi adicionada ao final do banco de dados.`
-            );
-          }
+        
+          await collection.insertOne(noticia);
+          console.log(`Notícia "${titulo}" foi adicionada ao banco de dados.`);
+        
         } else {
           // Se a notícia já existe, verifica se houve alteração nos campos
           const {
@@ -128,19 +102,17 @@ const moment = require("moment");
             fonteimagemPrincipal: existingfonteimagemPrincipal,
             autor: existingautor,
           } = noticiaAtual;
-
-          console.log("existingdataPublicacao:", existingdataPublicacao);
-          console.log("dataPublicacao:", dataPublicacao);
+        
           const camposModificados =
             existingTitulo !== titulo ||
             existingResumo !== resumo ||
             existingTextoNoticia !== textoNoticia ||
             existingImagemCompleta !== imagemCompleta ||
-            existingdataPublicacao.toISOString() !== dataPublicacao.toISOString() ||
+            existingdataPublicacao !== dataPublicacao ||
             existinglegendaimagemPrincipal !== legendaimagemPrincipal ||
             existingfonteimagemPrincipal !== fonteimagemPrincipal ||
             existingautor !== autor;
-
+        
           if (camposModificados) {
             // Se houve alteração nos campos, atualiza a notícia no banco de dados
             await collection.updateMany(
@@ -158,7 +130,7 @@ const moment = require("moment");
                 },
               }
             );
-
+        
             console.log(
               `Notícia "${titulo}" foi atualizada no banco de dados.`
             );
@@ -170,8 +142,9 @@ const moment = require("moment");
           }
         }
       }
+    
 
-      console.log(noticias);
+
     } catch (error) {
       console.log(error);
     } finally {
