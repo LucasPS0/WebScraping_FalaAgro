@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const { MongoClient } = require("mongodb");
 const cron = require("node-cron");
+const moment = require("moment");
 
 (async () => {
   // Define a URL do site a ser raspado
@@ -36,9 +37,12 @@ const cron = require("node-cron");
         // Extrai as informações da notícia
         const titulo = $(element).find(".titulo").text().trim();
         const resumo = $(element).find(".detalhes p").text().trim();
-        const dataPublicacao = $(element)
-          .find(".detalhes p:nth-of-type(2)")
-          .text();
+
+        const dataPublicacao = moment(
+          $(element).find(".situacao").text(),
+          "DD/MM/YY"
+        ).toDate();
+
         const link = $(element).find("a").attr("href").replace(/\?.*/, "");
 
         // Faz uma nova requisição GET para obter o HTML da notícia individual
@@ -46,19 +50,28 @@ const cron = require("node-cron");
         const $noticia = cheerio.load(noticiaData);
 
         // Extrai o texto da notícia e ajusta os links das imagens
-        const textoNoticia = $noticia(".texto-noticia").html().replace(/src="\/documents/g, 'src="https://www.embrapa.br/documents');
+        const textoNoticia = $noticia(".texto-noticia")
+          .html()
+          .replace(
+            /src="\/documents/g,
+            'src="https://www.embrapa.br/documents'
+          );
 
         // Extrai a imagem principal e suas informações
-        const imagemPrincipal = $noticia(".imagem-principal img[src]").attr("data-src");
+        const imagemPrincipal = $noticia(".imagem-principal img[src]").attr(
+          "data-src"
+        );
         const imagemCompleta = "https://www.embrapa.br/" + imagemPrincipal;
-        const legendaimagemPrincipal = $noticia(".legenda-imagem-principal").text();
+        const legendaimagemPrincipal = $noticia(
+          ".legenda-imagem-principal"
+        ).text();
         const fonteimagemPrincipal = $noticia(".fonte-imagem-principal").text();
         const autor = $noticia(".autor").text();
 
         // Verifica se a notícia já existe no banco de dados
-        const existingNoticia = await collection.findOne({ link });
+        const noticiaAtual = await collection.findOne({ link });
 
-        if (!existingNoticia) {
+        if (!noticiaAtual) {
           // Se a notícia não existe, cria um novo objeto com as informações e adiciona ao banco de dados
           const noticia = {
             titulo: titulo,
@@ -71,14 +84,38 @@ const cron = require("node-cron");
             autor: autor,
           };
 
-          // Adiciona a imagem principal, se existir
           if (imagemCompleta) {
             noticia.imagemCompleta = imagemCompleta;
           }
 
-          await collection.insertOne(noticia);
+          const noticiasExistentes = await collection
+            .find()
+            .sort({ dataPublicacao: -1 })
+            .toArray();
 
-          console.log(`Notícia "${titulo}" foi adicionada ao banco de dados.`);
+          let inserted = false;
+
+          for (let i = 0; i <= noticiasExistentes.length; i++) {
+            const noticiaAtual = noticiasExistentes[i];
+
+            if (!noticiaAtual || dataPublicacao > noticiaAtual.dataPublicacao) {
+              await collection.insertOne(noticia, { $position: i });
+
+              console.log(
+                `Notícia "${titulo}" foi adicionada ao banco de dados.`
+              );
+              inserted = true;
+              break;
+            }
+          }
+
+          if (!inserted) {
+            await collection.insertOne(noticia);
+
+            console.log(
+              `Notícia "${titulo}" foi adicionada ao final do banco de dados.`
+            );
+          }
         } else {
           // Se a notícia já existe, verifica se houve alteração nos campos
           const {
@@ -90,14 +127,16 @@ const cron = require("node-cron");
             legendaimagemPrincipal: existinglegendaimagemPrincipal,
             fonteimagemPrincipal: existingfonteimagemPrincipal,
             autor: existingautor,
-          } = existingNoticia;
+          } = noticiaAtual;
 
+          console.log("existingdataPublicacao:", existingdataPublicacao);
+          console.log("dataPublicacao:", dataPublicacao);
           const camposModificados =
             existingTitulo !== titulo ||
             existingResumo !== resumo ||
             existingTextoNoticia !== textoNoticia ||
             existingImagemCompleta !== imagemCompleta ||
-            existingdataPublicacao !== dataPublicacao ||
+            existingdataPublicacao.toISOString() !== dataPublicacao.toISOString() ||
             existinglegendaimagemPrincipal !== legendaimagemPrincipal ||
             existingfonteimagemPrincipal !== fonteimagemPrincipal ||
             existingautor !== autor;
@@ -120,10 +159,14 @@ const cron = require("node-cron");
               }
             );
 
-            console.log(`Notícia "${titulo}" foi atualizada no banco de dados.`);
+            console.log(
+              `Notícia "${titulo}" foi atualizada no banco de dados.`
+            );
           } else {
             // Se não houve alteração nos campos, não faz nada
-            console.log(`Notícia "${titulo}" já existe no banco de dados e não precisa ser atualizada.`);
+            console.log(
+              `Notícia "${titulo}" já existe no banco de dados e não precisa ser atualizada.`
+            );
           }
         }
       }

@@ -87,6 +87,20 @@ const cron = require('node-cron');
         console.log(`${result.modifiedCount} document(s) updated.`);
       }
 
+      const texto = await page.evaluate(() => {
+        // Obtém o elemento do texto
+        const elementoTexto = document.querySelector('.content-text__container');
+        
+        // Obtém o texto do elemento e remove espaços em branco extras
+        const texto = elementoTexto.textContent.trim();
+      
+        // Retorna o texto
+        return texto;
+      });
+
+      console.log(texto)
+      
+
 
     } catch (err) {
       console.error(err);
