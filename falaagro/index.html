@@ -45,6 +45,9 @@
       // Variáveis para controle de paginação
       let currentPage = 0;
       const itemsPerPage = 10;
+      
+      // Adiciona uma variável para rastrear a quantidade de elementos divMain adicionados
+      let mainItemsAdded = 0;
 
       // Função para buscar os dados da API
       function fetchData() {
@@ -55,12 +58,13 @@
         fetch(endpoint)
           .then((response) => response.json())
           .then((data) => {
-          
             // Seleciona os elementos HTML onde os dados serão inseridos
-            const containerPrincipal = document.querySelector("#containerPrincipal");
+            const containerPrincipal = document.querySelector(
+              "#containerPrincipal"
+            );
             const postsContainer = document.querySelector("#posts");
 
-data.reverse();
+            data.reverse();
             // Itera sobre os dados e cria os elementos HTML para exibir as notícias
             data.forEach((postData, index) => {
               // Cria os elementos HTML para o conteúdo principal
@@ -126,8 +130,9 @@ data.reverse();
               divMain.appendChild(divFilter);
 
               // Insere os elementos HTML nos containers correspondentes
-              if (index < 3) {
+              if (mainItemsAdded < 3) {
                 containerPrincipal.appendChild(divMain);
+                mainItemsAdded++;
               } else {
                 postsContainer.appendChild(post);
               }
@@ -136,21 +141,19 @@ data.reverse();
             // Incrementa a variável currentPage para buscar a próxima página de dados
             currentPage++;
             data.reverse();
-            
           })
           .catch((error) => console.error(error));
       }
 
       // Busca os dados iniciais
       fetchData();
-    
+
       // Adiciona um evento de scroll para detectar quando o usuário chega ao final da página
       window.addEventListener("scroll", () => {
         if (
           window.innerHeight + window.scrollY >=
           document.documentElement.scrollHeight
         ) {
-        
           // Busca a próxima página de dados quando o usuário chega ao final da página
           fetchData();
         }
