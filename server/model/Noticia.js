@@ -39,8 +39,9 @@ const Noticia = mongoose.model('Noticia', {
     type: String
   },
 
-
-
+  fonte: {
+    type: String
+  }
 })
 
 
