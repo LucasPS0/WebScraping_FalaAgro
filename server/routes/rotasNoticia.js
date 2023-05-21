@@ -28,7 +28,7 @@ router.get("/resumo", async (req, res) => {
   const skip = page * limit;
 
   try {
-    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao _id').sort({ _id: -1 })
+    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao _id fonte').sort({ _id: -1 })
                                    .skip(skip)
                                    .limit(limit);
 
@@ -37,7 +37,7 @@ router.get("/resumo", async (req, res) => {
       titulo: noticia.titulo,
       imagemCompleta: noticia.imagemCompleta,
       resumo: noticia.resumo,
-      dataPublicacao: noticia.dataPublicacao
+      fonte: noticia.fonte
     }));
 
     res.status(200).json(noticiasJSON);

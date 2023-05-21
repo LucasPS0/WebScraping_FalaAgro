@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const { MongoClient } = require("mongodb");
 const cron = require("node-cron");
-const moment = require("moment");
+
 
 (async () => {
   // Define a URL do site a ser raspado
@@ -60,6 +60,8 @@ const moment = require("moment");
           "data-src"
         );
         const imagemCompleta = "https://www.embrapa.br/" + imagemPrincipal;
+        console.log(imagemCompleta)
+
         const legendaimagemPrincipal = $noticia(
           ".legenda-imagem-principal"
         ).text();
@@ -80,12 +82,17 @@ const moment = require("moment");
             legendaimagemPrincipal: legendaimagemPrincipal,
             fonteimagemPrincipal: fonteimagemPrincipal,
             autor: autor,
+            fonte: "Fonte: Embrapa"
           };
         
           // Adiciona a imagem principal, se existir
-          if (imagemCompleta) {
+          if (imagemCompleta && imagemCompleta !== "https://www.embrapa.br/undefined" && imagemCompleta !== "https://www.embrapa.br/null") {
             noticia.imagemCompleta = imagemCompleta;
+          } else {
+            noticia.imagemCompleta = "https://maissoja.com.br/wp-content/uploads/2015/06/Embrapa.jpg";
           }
+          
+
         
           await collection.insertOne(noticia);
           console.log(`Notícia "${titulo}" foi adicionada ao banco de dados.`);
