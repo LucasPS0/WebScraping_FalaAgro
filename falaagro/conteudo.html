@@ -6,39 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fala Agro | Produção de açúcar na China é a menor em 7 anos, diz relatório</title>
     <link rel="shortcut icon" href="/img/icons/simbolo-falaagro-1.png" type="image/x-icon">
-    <link rel="stylesheet" href="/style/reset.css">
-    <link rel="stylesheet" href="/style/conteudo.css">
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/conteudo.css">
 </head>
 <body>
     <header class="nav">
         <div class="logo">
-            <img src="/img/logo-falaagro-horizontal.png" alt="logo">
+            <img src="./img/logo-falaagro-horizontal.png" alt="logo">
         </div>
         <div class="search">
             <input type="text"><p>Search...</p>
         </div>
     </header>
 
+  
     <article>
-        <div class="img">
-        </div>
-    </article>
-
-    <article>
-        <h1 id="article-title" class="title"></h1>
+        <h1 id="article-title" class="title" style="padding-bottom: 100px;"></h1>
       
         
          
         </h1>
-        <div id="article-text" class="text"></div>
-         
-    </div>
+        
+        <article>
+            <img id="imgPost">
+              </article>
+          
+
+        <div id="article-text" class="text">
+           
+
     
-        <div class="subimg">
-        </div>
-        <p class="text">
-         
-        </p>
+ 
     </article>
+
+
+    <script>
+        // Get the query parameter "id" to know which noticia to show
+        const urlParams = new URLSearchParams(window.location.search);
+        const noticiaId = urlParams.get('id');
+        
+        // Make a request to the API to get the noticia with the given ID
+        fetch(`http://localhost:3000/noticia/${noticiaId}`)
+          .then(response => response.json())
+          .then(noticia => {
+            // Update the HTML elements with the noticia's title and text
+            const noticiaTitulo = document.getElementById('article-title');
+            const noticiaTexto = document.getElementById('article-text');
+            const img = document.getElementById('imgPost')
+       
+            noticiaTitulo.textContent = noticia.titulo;
+            noticiaTexto.innerHTML = noticia.textoNoticia;
+            img.src = noticia.imagemCompleta;
+
+
+
+            
+  
+          });
+      </script>
 </body>
 </html>

@@ -7,7 +7,7 @@ article .img{
     height: 400px;
     margin: auto;
     border-radius: 15px;
-    background-image: url(/img/conteudo_index/conteudo1.jpg);
+
     background-size: cover;
     background-position: center;
 }
@@ -19,6 +19,9 @@ article .title{
     margin: auto;
     text-align: start;
     color: black;
+    padding-top: 40px;
+    font-family: 'Lato', sans-serif;
+
 }
 
 article .text{
@@ -38,6 +41,34 @@ article .subimg{
     background-size: cover;
     background-position: center;
 }
+
+
+p {
+    margin-bottom: 40px;
+    font-size: 0.9em !important;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+
+}
+
+
+span {
+    font-size: 2rem !important;
+}
+
+article > img {
+    width: 35vw;
+    margin: auto;
+    display: block;
+    padding-bottom: 30px;
+}
+
+p > img {
+   width: 500px !important;
+   height: 300px !important;
+ padding: 10px;
+}
+
 
 
 @media (max-width:1024px) {

@@ -37,8 +37,11 @@ const Noticia = mongoose.model('Noticia', {
 
   imagemCompleta: {
     type: String
-  }
+  },
 
+  fonte: {
+    type: String
+  }
 })
 
 

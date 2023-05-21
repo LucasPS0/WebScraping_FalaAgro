@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
+    <!-- Metadados e configurações básicas -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fala Agro</title>
+    <!-- Importação dos arquivos de estilo CSS -->
     <link rel="stylesheet" href="./style/index.css" />
     <link rel="stylesheet" href="./style/reset.css" />
+    <!-- Configuração do ícone da página -->
     <link
       rel="shortcut icon"
       href="./img/icons/simbolo-falaagro-1.png"
       type="image/x-icon"
     />
+    <!-- Importação das fontes do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,109 +24,140 @@
     />
   </head>
   <body>
+    <!-- Cabeçalho da página com logo e campo de pesquisa -->
     <header class="nav">
       <div class="logo">
         <img src="./img/logo-falaagro-horizontal.png" alt="logo" />
       </div>
       <div class="search">
-        <img
-          src="/falaagro/img/icons/Fa-Team-Fontawesome-FontAwesome-Magnifying-Glass.svg"
-          alt="search"
-        />
         <input type="text" placeholder="Pesquisar..." />
+
       </div>
     </header>
 
+    <!-- Conteúdo principal da página -->
     <main class="conteudo grid-container" id="mainContainer">
       <article class="grid gridprincipal" id="containerPrincipal"></article>
-
       <article class="grid" id="posts"></article>
     </main>
 
     <script>
-      const endpoint = "http://localhost:3000/noticia/resumo";
+      // Variáveis para controle de paginação
+      let currentPage = 0;
+      const itemsPerPage = 10;
+      
+      // Adiciona uma variável para rastrear a quantidade de elementos divMain adicionados
+      let mainItemsAdded = 0;
 
-      fetch(endpoint)
-        .then((response) => response.json())
-        .then((data) => {
-          const containerPrincipal = document.querySelector(
-            "#containerPrincipal"
-          );
-          const postsContainer = document.querySelector("#posts");
+      // Função para buscar os dados da API
+      function fetchData() {
+        // Monta o endpoint com os parâmetros de paginação
+        const endpoint = `http://localhost:3000/noticia/resumo?page=${currentPage}&limit=${itemsPerPage}`;
 
-          data.reverse();
+        // Faz a requisição para a API
+        fetch(endpoint)
+          .then((response) => response.json())
+          .then((data) => {
+            // Seleciona os elementos HTML onde os dados serão inseridos
+            const containerPrincipal = document.querySelector(
+              "#containerPrincipal"
+            );
+            const postsContainer = document.querySelector("#posts");
 
-          data.forEach((postData, index) => {
-            const divMain = document.createElement("div");
-            divMain.className = "conteudo1 grid-item";
+            data.reverse();
+            // Itera sobre os dados e cria os elementos HTML para exibir as notícias
+            data.forEach((postData, index) => {
+              // Cria os elementos HTML para o conteúdo principal
+              const divMain = document.createElement("div");
+              divMain.className = "conteudo1 grid-item";
 
-            const divMainTitle = document.createElement("a");
-            divMainTitle.className = "title";
-            divMainTitle.textContent = postData.titulo;
-           
+              const divMainTitle = document.createElement("a");
+              divMainTitle.className = "title";
+              divMainTitle.textContent = postData.titulo;
 
+              const divMainfoto = document.createElement("img");
+              divMainfoto.className = "conteudo1";
+              divMainfoto.src = postData.imagemCompleta;
 
-            const divMainfoto = document.createElement("img");
-            divMainfoto.className = "conteudo1";
-            divMainfoto.src = postData.imagemCompleta;
+              const divFilter = document.createElement("div");
+              divFilter.className = "conteudo1-filter";
 
-            const divFilter = document.createElement("div");
-            divFilter.className = "conteudo1-filter";
+              // Cria os elementos HTML para os posts
+              const post = document.createElement("div");
+              post.className = "conteudo grid-post post1";
 
-            const post = document.createElement("div");
-            post.className = "conteudo grid-post post1";
+              const imgpost = document.createElement("img");
+              imgpost.className = "imgpost classenova";
+              imgpost.src = postData.imagemCompleta;
 
-            const imgpost = document.createElement("img");
-            imgpost.className = "imgpost classenova";
-            imgpost.src = postData.imagemCompleta;
+              const conteudopost = document.createElement("div");
+              conteudopost.className = "conteudopost conteudo2";
 
-            const conteudopost = document.createElement("div");
-            conteudopost.className = "conteudopost conteudo2";
+              const title = document.createElement("p");
+              title.className = "title";
+              title.textContent = postData.titulo;
 
-            const title = document.createElement("p");
-            title.className = "title";
-            title.textContent = postData.titulo;
+              const sub = document.createElement("p");
+              sub.className = "sub";
+              sub.innerHTML = postData.resumo;
 
-            const sub = document.createElement("p");
-            sub.className = "sub";
-            sub.innerHTML = postData.resumo;
+              const fonte = document.createElement("p");
+              fonte.className = "fonte";
+              fonte.innerHTML = postData.fonte;
 
-            const fonte = document.createElement("p");
-            fonte.className = "fonte";
-            fonte.innerHTML = postData.dataPublicacao;
+              // Adiciona eventos de clique para redirecionar para a página de conteúdo
+              divMainTitle.addEventListener("click", () => {
+                window.location.href = `conteudo.html?id=${postData._id}`;
+              });
 
-   
-            divMainTitle.addEventListener("click", () => {
+              divMain.addEventListener("click", () => {
+                window.location.href = `conteudo.html?id=${postData._id}`;
+              });
 
-            window.location.href = './conteudo.html/"";
+              title.addEventListener("click", () => {
+                window.location.href = `conteudo.html?id=${postData._id}`;
+              });
 
+              // Monta a estrutura HTML com os elementos criados
+              conteudopost.appendChild(title);
+              conteudopost.appendChild(sub);
+              conteudopost.appendChild(fonte);
 
-});
+              post.appendChild(imgpost);
+              post.appendChild(conteudopost);
+              divMain.appendChild(divMainTitle);
+              divMain.appendChild(divMainfoto);
+              divMain.appendChild(divFilter);
 
+              // Insere os elementos HTML nos containers correspondentes
+              if (mainItemsAdded < 3) {
+                containerPrincipal.appendChild(divMain);
+                mainItemsAdded++;
+              } else {
+                postsContainer.appendChild(post);
+              }
+            });
 
+            // Incrementa a variável currentPage para buscar a próxima página de dados
+            currentPage++;
+            data.reverse();
+          })
+          .catch((error) => console.error(error));
+      }
 
-            conteudopost.appendChild(title);
-            conteudopost.appendChild(sub);
-            conteudopost.appendChild(fonte);
+      // Busca os dados iniciais
+      fetchData();
 
-            post.appendChild(imgpost);
-            post.appendChild(conteudopost);
-            divMain.appendChild(divMainTitle);
-            divMain.appendChild(divMainfoto);
-            divMain.appendChild(divFilter);
-
-            if (index < 3) {
-              containerPrincipal.appendChild(divMain);
-            } else {
-              postsContainer.appendChild(post);
-            }
-
-            
-          });
-
-     
-        })
-        .catch((error) => console.error(error));
+      // Adiciona um evento de scroll para detectar quando o usuário chega ao final da página
+      window.addEventListener("scroll", () => {
+        if (
+          window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight
+        ) {
+          // Busca a próxima página de dados quando o usuário chega ao final da página
+          fetchData();
+        }
+      });
     </script>
   </body>
 </html>
