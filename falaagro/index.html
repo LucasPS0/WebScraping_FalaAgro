@@ -36,9 +36,9 @@
     </header>
 
     <!-- Conteúdo principal da página -->
-    <main class="conteudo grid-container" id="mainContainer">
-      <article class="grid gridprincipal" id="containerPrincipal"></article>
-      <article class="grid" id="posts"></article>
+    <main class="grid-container" id="mainContainer">
+      <article class="gridprincipal" id="containerPrincipal"></article>
+      <article class="gridsecundario" id="posts"></article>
     </main>
 
     <script>
@@ -69,29 +69,31 @@
             data.forEach((postData, index) => {
               // Cria os elementos HTML para o conteúdo principal
               const divMain = document.createElement("div");
-              divMain.className = "conteudo1 grid-item";
+              divMain.className = "postprincipal";
 
               const divMainTitle = document.createElement("a");
               divMainTitle.className = "title";
               divMainTitle.textContent = postData.titulo;
 
+              
               const divMainfoto = document.createElement("img");
-              divMainfoto.className = "conteudo1";
+
               divMainfoto.src = postData.imagemCompleta;
 
               const divFilter = document.createElement("div");
-              divFilter.className = "conteudo1-filter";
+              divFilter.className = "image-filter";
+
 
               // Cria os elementos HTML para os posts
               const post = document.createElement("div");
-              post.className = "conteudo grid-post post1";
+              post.className = "postagem";
 
               const imgpost = document.createElement("img");
-              imgpost.className = "imgpost classenova";
+              imgpost.className = "imgpost";
               imgpost.src = postData.imagemCompleta;
 
               const conteudopost = document.createElement("div");
-              conteudopost.className = "conteudopost conteudo2";
+              conteudopost.className = "conteudo";
 
               const title = document.createElement("p");
               title.className = "title";
@@ -104,6 +106,10 @@
               const fonte = document.createElement("p");
               fonte.className = "fonte";
               fonte.innerHTML = postData.fonte;
+
+              const imageDiv = document.createElement("div");
+              imageDiv.className = "image"
+
 
               // Adiciona eventos de clique para redirecionar para a página de conteúdo
               divMainTitle.addEventListener("click", () => {
@@ -126,7 +132,8 @@
               post.appendChild(imgpost);
               post.appendChild(conteudopost);
               divMain.appendChild(divMainTitle);
-              divMain.appendChild(divMainfoto);
+              imageDiv.appendChild(divMainfoto);
+              divMain.appendChild(imageDiv)
               divMain.appendChild(divFilter);
 
               // Insere os elementos HTML nos containers correspondentes
