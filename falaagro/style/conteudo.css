@@ -1,13 +1,48 @@
-article {
-    padding-top: 30px;
+article{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    width: 80%;
 }
 
-article .img{
-    width: 80%;
+.principal{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.principal > img{
     height: 400px;
+    width: 800px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.principal > h1{
+    font-family: sans-serif;
+    font-size: 3em;
+    text-shadow: 1px 1px 1px rgba(55, 55, 55, 0.5);
+}
+
+.post > .text > p{
+    
+}
+
+/* article {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    padding-top: 30px;
+    width: 80%;
+}
+
+article > img{
+    height: 400px;
+    width: 1200px;
+    background-color: rgb(238, 135, 135);
     margin: auto;
     border-radius: 15px;
-
     background-size: cover;
     background-position: center;
 }
@@ -56,18 +91,7 @@ span {
     font-size: 2rem !important;
 }
 
-article > img {
-    width: 35vw;
-    margin: auto;
-    display: block;
-    padding-bottom: 30px;
-}
 
-p > img {
-   width: 500px !important;
-   height: 300px !important;
- padding: 10px;
-}
 
 
 
@@ -78,4 +102,4 @@ p > img {
     article .subimg{
         width: 80%;
     }
-}
+} */

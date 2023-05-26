@@ -47,3 +47,18 @@
     position: relative;
     right: 40px;
 }
+
+
+
+@media (max-width:425px) {
+
+.nav .search{
+    display: none;
+}
+
+.nav > .logo{
+    display: flex;
+    justify-content: center;
+
+}
+}
