@@ -1,5 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 const app = express();
 const cors = require('cors');
 
@@ -23,7 +27,11 @@ app.use('/noticia', rotasNoticia)
 
 //mongodb+srv://igor:8kLkRS49PZ6ycfiv@cluster0.otazhn5.mongodb.net/?retryWrites=true&w=majority
 //mongodb://localhost:27017/Noticia
-mongoose.connect("mongodb://127.0.0.1/noticia", {
+const dbUser= process.env.DB_USER
+const dbPassword = process.env.DB_PASS 
+const dbLink = process.env.DB_LINK
+
+mongoose.connect(dbLink, { 
       useNewUrlParser: true,
 
       useUnifiedTopology: true,
