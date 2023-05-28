@@ -1,8 +1,12 @@
+*{
+    font-family: sans-serif;
+}
+
 article{
-    display: flex;
     margin: auto;
     flex-direction: column;
     width: 80%;
+    margin-bottom: 30px;
 }
 
 .principal{
@@ -20,86 +24,67 @@ article{
 }
 
 .principal > h1{
-    font-family: sans-serif;
     font-size: 3em;
     text-shadow: 1px 1px 1px rgba(55, 55, 55, 0.5);
+    font-weight: 600;
 }
 
-.post > .text > p{
-    
-}
 
-/* article {
-    display: flex;
+.post > #article-text > p{
     margin: auto;
-    flex-direction: column;
-    padding-top: 30px;
-    width: 80%;
-}
-
-article > img{
-    height: 400px;
-    width: 1200px;
-    background-color: rgb(238, 135, 135);
-    margin: auto;
-    border-radius: 15px;
-    background-size: cover;
-    background-position: center;
-}
-
-article .title{
-    width: 80%;
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin: auto;
-    text-align: start;
+    text-align: justify;
+    width: 85%;
+    margin-top: 20px;
     color: black;
-    padding-top: 40px;
-    font-family: 'Lato', sans-serif;
-
+    font-size: 1.25em;
 }
 
-article .text{
+.post > #article-text > p > img{
+    width: 400px !important;
+    height: 400px !important;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.post > #article-text > h3{
     margin: auto;
-    padding: 1rem;
-    font-size: 2rem;
-    font-weight: 500;
-    width: 60%;
+    text-align: justify;
+    width: 90%;
+    margin-top: 25px;
+    color: black;
+    font-size: 1.5em;
 }
 
-article .subimg{
-    margin: auto;
-    padding-top: 30px;
-    width: 770px;
-    height: 462px;
-    background-image: url(/img/conteudo_index/conteudo1_sub.jpg);
-    background-size: cover;
-    background-position: center;
-}
+@media (max-width:820px) {
 
-
-p {
-    margin-bottom: 40px;
-    font-size: 0.9em !important;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-
-}
-
-
-span {
-    font-size: 2rem !important;
-}
-
-
-
-
-
-@media (max-width:1024px) {
-    article .text{
-        width: 80%;
+    article{
+        width: 95%;
     }
-    article .subimg{
-        width: 80%;
+    .principal > img{
+        height: 300px;
+        width: 90%;
     }
-} */
+    .principal > h1{
+        font-size: 1.5em;
+        text-shadow: none;
+    }
+    .post > #article-text > p{
+        width: 90%;
+        font-size: 1em;
+    }
+    .post > #article-text > h3{
+        width: 95%;
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width:375px) {
+    .principal > img{
+        height: 150px;
+        width: 90%;
+    }
+    .principal{
+        
+    }
+}
