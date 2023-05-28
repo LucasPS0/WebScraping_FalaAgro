@@ -8,6 +8,11 @@
     <link rel="shortcut icon" href="/img/icons/simbolo-falaagro-1.png" type="image/x-icon">
     <link rel="stylesheet" href="./style/reset.css">
     <link rel="stylesheet" href="./style/conteudo.css">
+    <link
+      rel="shortcut icon"
+      href="./img/icons/simbolo-falaagro-1.png"
+      type="image/x-icon"
+    />
 </head>
 <body>
     <header class="nav">
@@ -15,54 +20,40 @@
             <img src="./img/logo-falaagro-horizontal.png" alt="logo">
         </div>
         <div class="search">
-            <input type="text"><p>Search...</p>
+            <input type="text" placeholder="Pesquisar..." />
+    
         </div>
     </header>
 
-  
-    <article>
-        <h1 id="article-title" class="title" style="padding-bottom: 100px;"></h1>
-      
-        
-         
-        </h1>
-        
-        <article>
-            <img id="imgPost">
-              </article>
-          
+    <article class="principal">
+        <img id="imgPost">
+        <h1 id="article-title"></h1>
+    </article>
 
-        <div id="article-text" class="text">
-           
-
-    
- 
+    <article class="post">
+        <div id="article-text">
     </article>
 
 
-    <script>
-        // Get the query parameter "id" to know which noticia to show
-        const urlParams = new URLSearchParams(window.location.search);
-        const noticiaId = urlParams.get('id');
+<script>
+    // Get the query parameter "id" to know which noticia to show
+    const urlParams = new URLSearchParams(window.location.search);
+    const noticiaId = urlParams.get('id');
         
-        // Make a request to the API to get the noticia with the given ID
-        fetch(`http://localhost:3000/noticia/${noticiaId}`)
-          .then(response => response.json())
-          .then(noticia => {
-            // Update the HTML elements with the noticia's title and text
-            const noticiaTitulo = document.getElementById('article-title');
-            const noticiaTexto = document.getElementById('article-text');
-            const img = document.getElementById('imgPost')
-       
-            noticiaTitulo.textContent = noticia.titulo;
-            noticiaTexto.innerHTML = noticia.textoNoticia;
-            img.src = noticia.imagemCompleta;
+    // Make a request to the API to get the noticia with the given ID
+    fetch(`http://localhost:3000/noticia/${noticiaId}`)
+        .then(response => response.json())
+        .then(noticia => {
+        // Update the HTML elements with the noticia's title and text
+        const noticiaTitulo = document.getElementById('article-title');
+        const noticiaTexto = document.getElementById('article-text');
+        const img = document.getElementById('imgPost')
 
+        noticiaTitulo.textContent = noticia.titulo;
+        noticiaTexto.innerHTML = noticia.textoNoticia;
+        img.src = noticia.imagemCompleta;
 
-
-            
-  
-          });
-      </script>
+    });
+</script>
 </body>
 </html>

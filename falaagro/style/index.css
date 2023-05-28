@@ -1,4 +1,231 @@
-main .grid {
+/* TELA INTEIRA */
+.grid-container{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+}
+
+
+/* CONTEUDO PRINCIPAL 3 GRIDS */
+.gridprincipal{
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  margin: 50px auto;
+}
+
+
+.postprincipal:nth-child(1){
+  grid-row: 3/1;
+}
+
+.postprincipal:nth-child(2){
+  grid-row: 1/2;
+}
+
+.postprincipal:nth-child(3){
+  grid-row: 2/3;
+}
+
+/* POST CONTEUDO PRINCIPAL */
+.postprincipal{
+  display: flex;
+  flex-direction: column-reverse;
+  cursor: pointer;
+}
+
+.postprincipal > .title{
+  display: flex;
+  position: absolute;
+  align-items: flex-end;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: sans-serif;
+  width: 42.5%;
+  height: 150px;
+  padding-left: 1%;
+  padding-bottom: 20px;
+  color: white;
+  border-radius: 20px;
+  
+  background: linear-gradient(rgba(0,0,0,0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));;
+}
+
+
+.postprincipal:nth-child(n+2) > .image{
+  height: 245px;
+}
+
+.postprincipal > .image{
+  height: 500px;
+}
+
+
+.postprincipal:nth-child(1) > .image > img{
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.postprincipal:nth-child(n+2) > .image > img{
+  width: 100%;
+  height: 245px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* GRID POST SECUNDARIO */
+
+.gridsecundario{
+  display: grid;
+  grid-gap: 20px;
+}
+.gridsecundario > .postagem{
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.gridsecundario > .postagem > .imgpost{
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.gridsecundario > .postagem > .conteudo{
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  width: 75%;
+  font-family: sans-serif;
+  justify-content: space-around;
+}
+
+.gridsecundario > .postagem > .conteudo > .title{
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.gridsecundario > .postagem > .conteudo > .sub{
+  font-size: 0.9em;
+}
+.gridsecundario > .postagem > .conteudo > .fonte{
+  font-size: 1.1em;
+}
+
+
+/* Media querry */
+
+@media (max-width:900px) {
+  .grid-container{
+    width: 95%;
+  }
+  .postprincipal > .title{
+    width: 46%;
+}
+}
+
+
+/* MOBILE */
+
+@media (max-width:425px) {
+
+  .grid-container{
+    width: 98%;
+  }
+  .gridprincipal{
+    display: block;
+    grid-template-columns: 1fr 0fr 0fr ;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 20px auto;
+  }
+  .postprincipal:nth-child(n+3){
+    grid-row: 1/4;
+  }
+
+.postprincipal:nth-child(n+1) > .image{
+  height: 100px;
+}
+
+.postprincipal:nth-child(n+1) > .image > img{
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.postprincipal > .title{
+  height: 0px;
+  color: black;
+  font-size: 5em;
+}
+
+.postprincipal:nth-child(n+1){
+  flex-direction: row-reverse;
+  margin-bottom: 10px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+}
+
+.postprincipal > .title{
+  position: relative;
+  align-items: flex-start;
+  font-size: 0.7em;
+  width: 100%;
+  height: 0px;
+  padding-left: 5px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0));;
+}
+
+.gridsecundario > .postagem > .imgpost{
+  min-width: 150px;
+  height: 100px;
+}
+
+.gridsecundario > .postagem > .conteudo > .title{
+  font-size: 0.65em;
+}
+.gridsecundario > .postagem > .conteudo > .sub{
+  font-size: 0.45em;
+}
+.gridsecundario > .postagem > .conteudo > .fonte{
+  font-size: 0.55em;
+}
+}
+
+
+/* MOBILE S */
+
+@media (max-width:380px) {
+
+  .gridsecundario > .postagem > .imgpost{
+    width: 100px;
+    min-width: 100px;
+    height: 80px;
+  }
+  
+  .gridsecundario > .postagem > .conteudo > .title{
+    font-size: 0.6em;
+  }
+  .gridsecundario > .postagem > .conteudo > .sub{
+    font-size: 0.3em;
+  }
+  .gridsecundario > .postagem > .conteudo > .fonte{
+    font-size: 0.4em;
+  }
+}
+
+
+
+
+
+
+
+
+/* main .grid {
     justify-content: center;
     grid-gap: 50px;
     height: 450px;
@@ -66,21 +293,12 @@ main .grid {
     min-height: 250px;
   }
   
-  .post1 > .imgpost {
-    /* background-image: url(/img/conteudo_index/conteudo4.jpg); */
-  }
-  
-  .post2 > .imgpost {
-    /* background-image: url(/img/conteudo_index/conteudo5.jpg); */
-  }
-  
   .conteudo > .conteudopost {
     display: flex;
     flex-direction: column;
     color: rgb(61, 34, 27);
     justify-content: space-around;
     margin: 15px;
-    background-color: 
   }
   
   .conteudo > .conteudopost .title {
@@ -117,4 +335,4 @@ main .grid {
     min-height: 200px;
     border-radius: 15px;
   }
-
+ */
