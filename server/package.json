@@ -4,16 +4,19 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "nodemon ./index.js"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon ./index.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "body-parser": "^1.20.2",
-      "express": "^4.18.2",
-      "mongoose": "^7.0.4",
-      "nodemon": "^2.0.22"
+        "bcrypt": "^5.1.0",
+        "body-parser": "^1.20.2",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^7.0.4",
+        "nodemon": "^2.0.22"
     }
-  }
+}
