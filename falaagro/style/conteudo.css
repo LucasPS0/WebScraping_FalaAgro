@@ -96,8 +96,9 @@ br
 
 @media (max-width:420px) {
     .principal > img{
-        height: 150px;
+        height: 250px;
         width: 90%;
+        object-fit: cover;
     }
     .principal{
         
@@ -107,7 +108,7 @@ br
     .post > #article-text > p > img{
         width:310px !important;
         height: 400px !important;
-        object-fit: fill;
+        object-fit: cover;
         margin: 10px;
         border-radius: 10px;
     }
