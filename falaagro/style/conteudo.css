@@ -27,7 +27,7 @@ article{
     width: 800px;
     margin-bottom: 30px;
     border-radius: 10px;
-    object-fit: fill;
+    object-fit: cover;
 }
 
 .principal > h1{
