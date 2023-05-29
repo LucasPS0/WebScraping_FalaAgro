@@ -7,7 +7,7 @@ const cron = require("node-cron");
 (async () => {
   // Define a URL do site a ser raspado
   const url =
-    "https://www.embrapa.br/busca-de-noticias?p_auth=I3c3T5TO&p_p_id=buscanoticia_WAR_pcebusca6_1portlet&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_buscanoticia_WAR_pcebusca6_1portlet_javax.portlet.action=buscarNoticias&_buscanoticia_WAR_pcebusca6_1portlet_keywords=&p_p_lifecycle=1&_buscanoticia_WAR_pcebusca6_1portlet_advancedSearch=false&_buscanoticia_WAR_pcebusca6_1portlet_delta=10&_buscanoticia_WAR_pcebusca6_1portlet_resetCur=false&_buscanoticia_WAR_pcebusca6_1portlet_andOperator=true&_buscanoticia_WAR_pcebusca6_1portlet_cur=10";
+    "https://www.embrapa.br/busca-de-noticias";
 
   // Define a URI do banco de dados MongoDB
   const uri = "mongodb://127.0.0.1/";
