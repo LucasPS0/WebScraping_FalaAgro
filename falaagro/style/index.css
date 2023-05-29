@@ -144,7 +144,7 @@
 
 /* MOBILE */
 
-@media (max-width:425px) {
+@media (max-width:625px) {
 
   .grid-container{
     width: 98%;
@@ -204,13 +204,15 @@
 }
 
 .gridsecundario > .postagem > .conteudo > .title{
-  font-size: 0.65em;
+  font-size: 0.75em;
 }
 .gridsecundario > .postagem > .conteudo > .sub{
-  font-size: 0.45em;
+  font-size: 0.55em;
 }
 .gridsecundario > .postagem > .conteudo > .fonte{
   font-size: 0.55em;
+  font-weight: bold;
+  padding-top: 5px;
 }
 }
 

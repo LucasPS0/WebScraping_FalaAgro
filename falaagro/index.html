@@ -60,7 +60,7 @@
         fetch(endpoint)
           .then((response) => response.json())
           .then((data) => {
-            data.reverse();
+
             data.forEach((postData, index) => {
               const divMain = document.createElement("div");
               divMain.className = "postprincipal";
@@ -132,7 +132,7 @@
             });
 
             currentPage++;
-            data.reverse();
+  
           })
           .catch((error) => console.error(error));
       }

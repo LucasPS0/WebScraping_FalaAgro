@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const { MongoClient } = require("mongodb");
 const cron = require("node-cron");
+const moment = require("moment");
 
 (async () => {
   // Define a URL do site a ser raspado
@@ -38,7 +39,8 @@ const cron = require("node-cron");
         const titulo = $(element).find(".titulo").text().trim();
         const resumo = $(element).find(".detalhes p").text().trim();
 
-        const dataPublicacao = $(element).find(".situacao").text();
+
+        const dataPublicacao = moment($(element).find(".situacao").text(), "DD/MM/YYYY").toDate();
 
         const link = $(element).find("a").attr("href").replace(/\?.*/, "");
 

@@ -38,7 +38,7 @@ router.get("/resumo", async (req, res) => {
   const skip = page * limit;
 
   try {
-    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao _id fonte').sort({ _id: -1 })
+    const noticias = await Noticia.find({}, 'titulo imagemCompleta resumo dataPublicacao _id fonte').sort({ dataPublicacao: -1 })
                                    .skip(skip)
                                    .limit(limit);
 
