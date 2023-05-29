@@ -4,10 +4,10 @@ const axios = require("axios");
 const { MongoClient } = require("mongodb");
 const cron = require("node-cron");
 
-
 (async () => {
   // Define a URL do site a ser raspado
-  const url = "https://www.embrapa.br/busca-de-noticias";
+  const url =
+    "https://www.embrapa.br/busca-de-noticias?p_auth=I3c3T5TO&p_p_id=buscanoticia_WAR_pcebusca6_1portlet&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_buscanoticia_WAR_pcebusca6_1portlet_javax.portlet.action=buscarNoticias&_buscanoticia_WAR_pcebusca6_1portlet_keywords=&p_p_lifecycle=1&_buscanoticia_WAR_pcebusca6_1portlet_advancedSearch=false&_buscanoticia_WAR_pcebusca6_1portlet_delta=10&_buscanoticia_WAR_pcebusca6_1portlet_resetCur=false&_buscanoticia_WAR_pcebusca6_1portlet_andOperator=true&_buscanoticia_WAR_pcebusca6_1portlet_cur=10";
 
   // Define a URI do banco de dados MongoDB
   const uri = "mongodb://127.0.0.1/";
@@ -38,8 +38,7 @@ const cron = require("node-cron");
         const titulo = $(element).find(".titulo").text().trim();
         const resumo = $(element).find(".detalhes p").text().trim();
 
-        const dataPublicacao = 
-          $(element).find(".situacao").text();
+        const dataPublicacao = $(element).find(".situacao").text();
 
         const link = $(element).find("a").attr("href").replace(/\?.*/, "");
 
@@ -59,8 +58,10 @@ const cron = require("node-cron");
         const imagemPrincipal = $noticia(".imagem-principal img[src]").attr(
           "data-src"
         );
-        const imagemCompleta = "https://www.embrapa.br/" + imagemPrincipal;
-        console.log(imagemCompleta)
+        const imagemCompleta = imagemPrincipal
+          ? "https://www.embrapa.br/" + imagemPrincipal
+          : "https://maissoja.com.br/wp-content/uploads/2015/06/Embrapa.jpg";
+        console.log(imagemCompleta);
 
         const legendaimagemPrincipal = $noticia(
           ".legenda-imagem-principal"
@@ -82,21 +83,12 @@ const cron = require("node-cron");
             legendaimagemPrincipal: legendaimagemPrincipal,
             fonteimagemPrincipal: fonteimagemPrincipal,
             autor: autor,
-            fonte: "Fonte: Embrapa"
+            fonte: "Fonte: Embrapa",
+            imagemCompleta: imagemCompleta,
           };
-        
-          // Adiciona a imagem principal, se existir
-          if (imagemCompleta && imagemCompleta !== "https://www.embrapa.br/undefined" && imagemCompleta !== "https://www.embrapa.br/null") {
-            noticia.imagemCompleta = imagemCompleta;
-          } else {
-            noticia.imagemCompleta = "https://maissoja.com.br/wp-content/uploads/2015/06/Embrapa.jpg";
-          }
-          
 
-        
           await collection.insertOne(noticia);
           console.log(`Notícia "${titulo}" foi adicionada ao banco de dados.`);
-        
         } else {
           // Se a notícia já existe, verifica se houve alteração nos campos
           const {
@@ -109,7 +101,7 @@ const cron = require("node-cron");
             fonteimagemPrincipal: existingfonteimagemPrincipal,
             autor: existingautor,
           } = noticiaAtual;
-        
+
           const camposModificados =
             existingTitulo !== titulo ||
             existingResumo !== resumo ||
@@ -119,7 +111,7 @@ const cron = require("node-cron");
             existinglegendaimagemPrincipal !== legendaimagemPrincipal ||
             existingfonteimagemPrincipal !== fonteimagemPrincipal ||
             existingautor !== autor;
-        
+
           if (camposModificados) {
             // Se houve alteração nos campos, atualiza a notícia no banco de dados
             await collection.updateMany(
@@ -137,7 +129,7 @@ const cron = require("node-cron");
                 },
               }
             );
-        
+
             console.log(
               `Notícia "${titulo}" foi atualizada no banco de dados.`
             );
@@ -149,9 +141,6 @@ const cron = require("node-cron");
           }
         }
       }
-    
-
-
     } catch (error) {
       console.log(error);
     } finally {

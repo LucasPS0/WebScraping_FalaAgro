@@ -2,6 +2,13 @@
     font-family: sans-serif;
 }
 
+
+iframe{ 
+    display: block;
+    margin: auto;
+    width: fit-content;
+}
+
 article{
     margin: auto;
     flex-direction: column;
@@ -19,14 +26,16 @@ article{
     height: 400px;
     width: 800px;
     margin-bottom: 30px;
-    border-radius: 30px;
-    object-fit: cover;
+    border-radius: 10px;
+    object-fit: fill;
 }
 
 .principal > h1{
     font-size: 3em;
     text-shadow: 1px 1px 1px rgba(55, 55, 55, 0.5);
     font-weight: 600;
+    max-width: 86%;
+    padding-bottom: 20px;
 }
 
 
@@ -56,6 +65,12 @@ article{
     font-size: 1.5em;
 }
 
+br
+{   content: "A" !important;
+    display: block !important;
+    margin-bottom: 1.5em !important;
+}
+
 @media (max-width:820px) {
 
     article{
@@ -79,12 +94,21 @@ article{
     }
 }
 
-@media (max-width:375px) {
+@media (max-width:420px) {
     .principal > img{
         height: 150px;
         width: 90%;
     }
     .principal{
         
+    }
+
+
+    .post > #article-text > p > img{
+        width:310px !important;
+        height: 400px !important;
+        object-fit: fill;
+        margin: 10px;
+        border-radius: 10px;
     }
 }

@@ -56,6 +56,26 @@ router.get("/resumo", async (req, res) => {
   }
 });
 
+// Pesquisa de notícias por termos de pesquisa
+router.get("/search", async (req, res) => {
+  try {
+    const searchTerm = req.query.term; // Obtém o termo de pesquisa dos parâmetros da consulta
+
+    // Realiza a consulta no banco de dados MongoDB para encontrar notícias correspondentes ao termo de pesquisa
+    const noticias = await Noticia.find({
+      $or: [
+        { titulo: { $regex: searchTerm, $options: "i" } }, // Pesquisa por título (ignorando maiúsculas e minúsculas)
+        { resumo: { $regex: searchTerm, $options: "i" } } // Pesquisa por resumo (ignorando maiúsculas e minúsculas)
+      ]
+    });
+
+    res.status(200).json(noticias);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 //LEITURA POR ID
 router.get('/:id', async(req, res) => {
