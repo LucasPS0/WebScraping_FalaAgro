@@ -33,7 +33,7 @@ const dbLink = process.env.DB_LINK
 
 mongoose.connect(dbLink, { 
       useNewUrlParser: true,
-
+      dbName: 'noticia',
       useUnifiedTopology: true,
     })
     .then((result) => {

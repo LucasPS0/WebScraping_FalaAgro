@@ -22,9 +22,11 @@ router.get("/", async (req, res) => {
   try {
     const noticias = await Noticia.find();
     res.status(200).json(noticias);
+    console.log(noticias);
   } catch (error) {
     res.status(500).json({ error: error });
   }
+
 });
 
 //LEITURA DO RESUMO DA NOTICIA

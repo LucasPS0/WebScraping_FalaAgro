@@ -11,7 +11,7 @@ const moment = require("moment");
     "https://www.embrapa.br/busca-de-noticias";
 
   // Define a URI do banco de dados MongoDB
-  const uri = "mongodb://127.0.0.1/";
+  const uri = "mongodb+srv://lucaspsilva:35253030@courtneysdata.vjqs1cs.mongodb.net/?retryWrites=true&w=majority";
   const client = new MongoClient(uri);
 
   // Função para raspar as notícias do site Embrapa
