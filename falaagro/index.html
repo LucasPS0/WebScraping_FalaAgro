@@ -19,15 +19,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="manifest" href="manifest.json">
+    <script src="serviceworker.js"></script>
+    <meta name="theme-color" content="#b7f200"/>
   </head>
+
   <body>
     <!-- Cabeçalho da página com logo e campo de pesquisa -->
     <header class="nav">
       <div class="logo">
-        <img src="./img/logo-falaagro-horizontal.png" alt="logo" />
+        <img
+          src="./img/logo-falaagro-horizontal.png"
+          alt="logo"
+          id="logoAgro"
+        />
       </div>
       <div class="search">
         <input type="text" id="searchInput" placeholder="Pesquisar..." />
@@ -41,11 +49,9 @@
     </main>
 
     <script>
-      searchInput.addEventListener("keypress", function (event) {
-        if (event.keyCode === 13) {
-          const searchTerm = searchInput.value;
-          searchNews(searchTerm);
-        }
+      searchInput.addEventListener("input", function (event) {
+        const searchTerm = searchInput.value;
+        searchNews(searchTerm);
       });
 
       let currentPage = 0;
@@ -60,7 +66,6 @@
         fetch(endpoint)
           .then((response) => response.json())
           .then((data) => {
-
             data.forEach((postData, index) => {
               const divMain = document.createElement("div");
               divMain.className = "postprincipal";
@@ -112,6 +117,10 @@
                 window.location.href = `conteudo.html?id=${postData._id}`;
               });
 
+              imgpost.addEventListener("click", () => {
+                window.location.href = `conteudo.html?id=${postData._id}`;
+              });
+
               conteudopost.appendChild(title);
               conteudopost.appendChild(sub);
               conteudopost.appendChild(fonte);
@@ -132,61 +141,73 @@
             });
 
             currentPage++;
-  
           })
           .catch((error) => console.error(error));
       }
 
       function searchNews(searchTerm) {
-  const endpoint = `https://apifalaagro.onrender.com/noticia/search?term=${searchTerm}`;
+        const endpoint = `https://apifalaagro.onrender.com/noticia/search?term=${searchTerm}`;
 
-  fetch(endpoint)
-  .then((response) => response.json())
-  .then((data) => {
-    postsContainer.innerHTML = "";
-    containerPrincipal.innerHTML = "";
-    data.forEach((postData, index) => {
-      const post = document.createElement("div");
-      post.className = "postagem";
+        fetch(endpoint)
+          .then((response) => response.json())
+          .then((data) => {
+            const existingPosts = postsContainer.querySelectorAll(".postagem");
+            existingPosts.forEach((post) => {
+              post.classList.add("fade-out");
+            });
 
-      const imgpost = document.createElement("img");
-      imgpost.className = "imgpost";
-      imgpost.src = postData.imagemCompleta;
+            setTimeout(() => {
+              postsContainer.innerHTML = "";
+              containerPrincipal.innerHTML = "";
 
-      const conteudopost = document.createElement("div");
-      conteudopost.className = "conteudo";
+              data.forEach((postData, index) => {
+                const post = document.createElement("div");
+                post.className = "postagem fade-in"; // Add fade-in class for smooth appearance
 
-      const title = document.createElement("p");
-      title.className = "title";
-      title.textContent = postData.titulo;
+                const imgpost = document.createElement("img");
+                imgpost.className = "imgpost";
+                imgpost.src = postData.imagemCompleta;
 
-      const sub = document.createElement("p");
-      sub.className = "sub";
-      sub.innerHTML = postData.resumo;
+                const conteudopost = document.createElement("div");
+                conteudopost.className = "conteudo";
 
-      const fonte = document.createElement("p");
-      fonte.className = "fonte";
-      fonte.innerHTML = postData.fonte;
+                const title = document.createElement("p");
+                title.className = "title";
+                title.textContent = postData.titulo;
 
-      // Add click event to redirect to the content page
-      post.addEventListener("click", () => {
-        window.location.href = `conteudo.html?id=${postData._id}`;
-      });
+                const sub = document.createElement("p");
+                sub.className = "sub";
+                sub.innerHTML = postData.resumo;
 
-      // Build the HTML structure with the created elements
-      conteudopost.appendChild(title);
-      conteudopost.appendChild(sub);
-      conteudopost.appendChild(fonte);
+                const fonte = document.createElement("p");
+                fonte.className = "fonte";
+                fonte.innerHTML = postData.fonte;
 
-      post.appendChild(imgpost);
-      post.appendChild(conteudopost);
+                post.addEventListener("click", () => {
+                  window.location.href = `conteudo.html?id=${postData._id}`;
+                });
 
-      postsContainer.appendChild(post);
-    });
-  })
-  .catch((error) => console.error(error));
-}
+                conteudopost.appendChild(title);
+                conteudopost.appendChild(sub);
+                conteudopost.appendChild(fonte);
 
+                post.appendChild(imgpost);
+                post.appendChild(conteudopost);
+
+                postsContainer.appendChild(post);
+              });
+
+              // Remove fade-out class from newly added posts after a short delay
+              setTimeout(() => {
+                const newPosts = postsContainer.querySelectorAll(".fade-in");
+                newPosts.forEach((post) => {
+                  post.classList.remove("fade-in");
+                });
+              }, 100);
+            }, 200);
+          })
+          .catch((error) => console.error(error));
+      }
 
       fetchData();
 
@@ -197,6 +218,13 @@
         ) {
           fetchData();
         }
+      });
+
+      const backLink = document.querySelector("#logoAgro");
+
+      backLink.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link behavior
+        location.reload(); // Reload the page
       });
     </script>
   </body>

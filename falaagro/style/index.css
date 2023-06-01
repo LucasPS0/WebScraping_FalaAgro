@@ -1,3 +1,4 @@
+
 /* TELA INTEIRA */
 .grid-container{
   display: flex;
@@ -5,6 +6,7 @@
   width: 90%;
   margin: auto;
 }
+
 
 
 /* CONTEUDO PRINCIPAL 3 GRIDS */
@@ -40,8 +42,8 @@
   position: absolute;
   align-items: flex-end;
   font-size: 1.5em;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: bold;
-  font-family: sans-serif;
   width: 25.5%;
   height: 150px;
   padding-left: 1%;
@@ -120,15 +122,37 @@
 
 .gridsecundario > .postagem > .conteudo > .title{
   font-size: 1.5em;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
 }
 .gridsecundario > .postagem > .conteudo > .sub{
   font-size: 0.9em;
+  font-family: 'Space Grotesk', sans-serif;
+  
 }
 .gridsecundario > .postagem > .conteudo > .fonte{
   font-size: 1.1em;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-in.active {
+  opacity: 1;
+}
+
+
+#logoAgro {
+  cursor: pointer;
+}
 
 /* Media querry */
 
@@ -138,6 +162,12 @@
   }
   .postprincipal > .title{
     width: 46%;
+}
+
+.gridsecundario > .postagem > .imgpost{
+  min-width: 250px;
+  height: 200px;
+  
 }
 }
 
@@ -184,6 +214,12 @@
     height: 200px;
 }
 
+.postprincipal > .image::after {
+
+display: none;
+}
+
+
 
 
 .postprincipal > .title{
@@ -201,7 +237,10 @@
 .gridsecundario > .postagem > .imgpost{
   min-width: 150px;
   height: 100px;
+  
 }
+
+
 
 .gridsecundario > .postagem > .conteudo > .title{
   font-size: 0.75em;
@@ -216,31 +255,60 @@
 }
 }
 
+
 .postprincipal > .image::after {
 
-  height: 100px; 
+  height: 200px; 
   border-radius: 10px;
 }
 
 
 /* MOBILE S */
 
-@media (max-width:380px) {
+@media (max-width:420px) {
 
   .gridsecundario > .postagem > .imgpost{
-    width: 100px;
-    min-width: 100px;
-    height: 80px;
+    width: 230px;
+    height: 170px;
+
+  }
+
+  .gridsecundario > .postagem > .conteudo{
+    padding-left: 8px;
+    width: 100%;
+
+  }
+
+  .gridsecundario{
+    display: grid;
+    padding: 5px;
+    font-size: 1.8rem
+  }
+
+  .gridprincipal {
+    height: auto;
+    font-size: 1.3rem;
+  }
+
+  .postprincipal:nth-child(n+1){
+  margin: 20px 20px 40px 20px;
   }
   
   .gridsecundario > .postagem > .conteudo > .title{
-    font-size: 0.6em;
+    font-size: 0.5em;
   }
   .gridsecundario > .postagem > .conteudo > .sub{
-    font-size: 0.3em;
+    font-size: 0.4em;
   }
   .gridsecundario > .postagem > .conteudo > .fonte{
     font-size: 0.4em;
+  }
+}
+
+
+@media  (min-width: 1900px) {
+  .gridsecundario {
+   margin: 80px auto;
   }
 }
 

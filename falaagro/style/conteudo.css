@@ -1,6 +1,43 @@
 *{
-    font-family: sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
 }
+
+.nav {
+    flex-direction: row-reverse;
+    width: 100%;
+
+}
+
+
+
+.back-link {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    color: #92d500;
+
+  }
+
+  .back-link > strong {
+    color: #333;
+    text-decoration: none;
+    font-size: 3rem;
+    margin-right: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #92d500;
+
+  }
+
+
+  
+  .back-link:hover {
+    color: #555;
+  }
+  
 
 
 iframe{ 
@@ -32,10 +69,11 @@ article{
 
 .principal > h1{
     font-size: 3em;
-    text-shadow: 1px 1px 1px rgba(55, 55, 55, 0.5);
+
     font-weight: 600;
     max-width: 86%;
     padding-bottom: 20px;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 
@@ -46,6 +84,7 @@ article{
     margin-top: 20px;
     color: black;
     font-size: 1.25em;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .post > #article-text > p > img{
@@ -111,5 +150,13 @@ br
         object-fit: cover;
         margin: 10px;
         border-radius: 10px;
+    }
+}
+
+
+@media (max-width:620px) {
+
+    .back-link > strong {
+      font-size: 2rem;
     }
 }
