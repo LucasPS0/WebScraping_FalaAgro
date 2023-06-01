@@ -55,7 +55,7 @@
       const postsContainer = document.querySelector("#posts");
 
       function fetchData() {
-        const endpoint = `http://localhost:3000/noticia/resumo?page=${currentPage}&limit=${itemsPerPage}`;
+        const endpoint = `https://apifalaagro.onrender.com/noticia/resumo?page=${currentPage}&limit=${itemsPerPage}`;
 
         fetch(endpoint)
           .then((response) => response.json())
@@ -138,7 +138,7 @@
       }
 
       function searchNews(searchTerm) {
-  const endpoint = `http://localhost:3000/noticia/search?term=${searchTerm}`;
+  const endpoint = `https://apifalaagro.onrender.com/noticia/search?term=${searchTerm}`;
 
   fetch(endpoint)
   .then((response) => response.json())
