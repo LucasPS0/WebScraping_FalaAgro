@@ -29,7 +29,7 @@ app.use('/noticia', rotasNoticia)
 //mongodb://localhost:27017/Noticia
 const dbUser= process.env.DB_USER
 const dbPassword = process.env.DB_PASS 
-const dbLink = process.env.DB_LINK
+const dbLink = 'mongodb+srv://lucaspsilva:35253030@courtneysdata.vjqs1cs.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.connect(dbLink, { 
       useNewUrlParser: true,
