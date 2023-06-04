@@ -2,11 +2,16 @@
     font-family: 'Space Grotesk', sans-serif;
 }
 
+
+* {
+ 
+}
 .nav {
     flex-direction: row-reverse;
-    width: 100%;
-
+    width: 100vw;
 }
+
+
 
 
 
@@ -109,6 +114,14 @@ br
     display: block !important;
     margin-bottom: 1.5em !important;
 }
+
+.content-media-container {
+    display: none;
+}
+
+
+
+
 
 @media (max-width:820px) {
 

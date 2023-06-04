@@ -3,33 +3,43 @@ const cheerio = require("cheerio");
 const fs = require("fs");
 const { MongoClient } = require("mongodb");
 
-const uri = "mongodb://127.0.0.1/";
+const uri = "mongodb+srv://lucaspsilva:35253030@courtneysdata.vjqs1cs.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 (async () => {
   const url = "https://globorural.globo.com/ultimas-noticias/";
 
   const scrapGloboRural = async () => {
-    const dataGloboRural = []; // Alteração: agora é um array
+    const dataGloboRural = [];
 
     async function getHtml() {
       const { data: html } = await axios.get(url);
       return html;
     }
 
+    async function getCompleteNews(link) {
+      const { data: html } = await axios.get(link);
+      const $ = cheerio.load(html);
+      const textoNoticia = $("article").text().trim();
+   
+      return textoNoticia;
+    }
+
     const response = await getHtml();
     const $ = cheerio.load(response);
-    $(".feed-post-body").each((index, element) => {
-      const title = $(element).find(".feed-post-link").text();
-      const resume = $(element).find(".feed-post-body-resumo").text();
-      const link = $(element).find(".feed-post-body a").attr("href");
-      const publication = $(element).find(".feed-post-datetime").text();
-      const theme = $(element).find(".feed-post-metadata-section").text();
-      const image = $(element).find(".feed-post-figure-link img").attr("src");
+    const feedPostBody = $(".feed-post-body").toArray();
 
-      // Archive data in an object
-      dataGloboRural.push({ title, resume, link, publication, theme, image }); // Alteração: push para adicionar ao array
-    });
+    for (const element of feedPostBody) {
+      const titulo = $(element).find(".feed-post-link").text();
+      const resumo = $(element).find(".feed-post-body-resumo").text();
+      const link = $(element).find(".feed-post-body a").attr("href");
+      const dataPublicacao = $(element).find(".feed-post-datetime").text();
+      const imagemCompleta = $(element).find(".feed-post-figure-link img").attr("src");
+      const fonte = "Fonte: Globo Rural"
+      const textoNoticia = await getCompleteNews(link);
+
+      dataGloboRural.push({ titulo, resumo, link, dataPublicacao, imagemCompleta, textoNoticia, fonte });
+    }
 
     fs.writeFile("globoData.json", JSON.stringify(dataGloboRural), (err) => {
       if (err) throw err;
@@ -46,50 +56,16 @@ const client = new MongoClient(uri);
       const collection = database.collection("noticias");
 
       for (const news of data) {
-        // Check if news with the same title already exists
-        const existingNews = await collection.findOne({ title: news.title });
+        const existingNews = await collection.findOne({ titulo: news.titulo });
 
         if (existingNews) {
-          console.log(`A notícia "${news.title}" já está no banco de dados.`);
-          continue; // Skip insertion
+          console.log(`A notícia "${news.titulo}" já está no banco de dados.`);
+          continue;
         }
 
         const result = await collection.insertOne(news);
         console.log("Dados inseridos no MongoDB com sucesso:", result.insertedId);
       }
-
-      for (const noticia of noticias) {
-        // Abre a página da notícia
-        await page.goto(noticia.link);
-
-        // Espera pelo seletor .content-text__container
-        await page.waitForSelector('.mc-article-body p.content-text__container');
-
-        // Extrai o texto da notícia
-        const texto = await page.evaluate(() => {
-          const textoElementos = Array.from(document.querySelectorAll('.mc-article-body p.content-text__container '));
-          return textoElementos.map(textoElemento => textoElemento.textContent).join('\n');
-        });
-
-        // Atualiza a notícia com o texto
-        const result = await collection.updateOne({ link: noticia.link }, { $set: { texto } });
-        console.log(`${result.modifiedCount} document(s) updated.`);
-      }
-
-      const texto = await page.evaluate(() => {
-        // Obtém o elemento do texto
-        const elementoTexto = document.querySelector('.content-text__container');
-        
-        // Obtém o texto do elemento e remove espaços em branco extras
-        const texto = elementoTexto.textContent.trim();
-      
-        // Retorna o texto
-        return texto;
-      });
-
-      console.log(texto)
-      
-
 
     } catch (err) {
       console.error("Erro ao inserir os dados no MongoDB:", err);
