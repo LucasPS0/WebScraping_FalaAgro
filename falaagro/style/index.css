@@ -108,7 +108,8 @@
   width: 250px;
   height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 15px;
+  padding: 5px;
 }
 
 .gridsecundario > .postagem > .conteudo{
@@ -133,6 +134,7 @@
 .gridsecundario > .postagem > .conteudo > .fonte{
   font-size: 1.1em;
   font-family: 'Space Grotesk', sans-serif;
+  font-weight: bold;
 }
 
 .fade-out {
@@ -167,6 +169,7 @@
 .gridsecundario > .postagem > .imgpost{
   min-width: 250px;
   height: 200px;
+
   
 }
 }
@@ -269,7 +272,8 @@ display: none;
 
   .gridsecundario > .postagem > .imgpost{
     width: 230px;
-    height: 170px;
+    height: 150px;
+    padding: 5px;
 
   }
 

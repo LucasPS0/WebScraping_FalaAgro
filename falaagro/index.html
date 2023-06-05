@@ -22,9 +22,9 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json" />
     <script src="serviceworker.js"></script>
-    <meta name="theme-color" content="#b7f200"/>
+    <meta name="theme-color" content="#b7f200" />
   </head>
 
   <body>
@@ -59,6 +59,7 @@
       let mainItemsAdded = 0;
       const containerPrincipal = document.querySelector("#containerPrincipal");
       const postsContainer = document.querySelector("#posts");
+      const displayedNewsIds = new Set();
 
       function fetchData() {
         const endpoint = `https://apifalaagro.onrender.com/noticia/resumo?page=${currentPage}&limit=${itemsPerPage}`;
@@ -67,6 +68,12 @@
           .then((response) => response.json())
           .then((data) => {
             data.forEach((postData, index) => {
+              if (displayedNewsIds.has(postData._id)) {
+                return;
+              }
+
+              displayedNewsIds.add(postData._id);
+
               const divMain = document.createElement("div");
               divMain.className = "postprincipal";
 
@@ -216,7 +223,7 @@
           window.innerHeight + window.scrollY >=
           document.documentElement.scrollHeight
         ) {
-          fetchData();
+          setTimeout(fetchData, 500); // atraso de 500ms antes de chamar a função fetchData()
         }
       });
 
