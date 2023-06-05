@@ -49,10 +49,20 @@
     </main>
 
     <script>
-      searchInput.addEventListener("input", function (event) {
-        const searchTerm = searchInput.value;
-        searchNews(searchTerm);
-      });
+    let debounceTimeout;
+
+searchInput.addEventListener("input", function (event) {
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    const searchTerm = searchInput.value;
+    if (searchTerm === '') {
+      location.reload();
+    } else {
+      searchNews(searchTerm);
+    }
+  }, 500); // Atraso de 500 milissegundos (ajuste conforme necessário)
+});
+
 
       let currentPage = 0;
       const itemsPerPage = 10;
@@ -164,8 +174,18 @@
             });
 
             setTimeout(() => {
+           
               postsContainer.innerHTML = "";
               containerPrincipal.innerHTML = "";
+
+
+              if (data.length === 0) {
+  // Display message indicating no news was found
+  postsContainer.innerHTML = '<p style="padding:20px; font-family: \'Space Grotesk\', sans-serif; font-size: 2rem">Nenhuma notícia foi encontrada.</p>';
+  return;
+}
+
+
 
               data.forEach((postData, index) => {
                 const post = document.createElement("div");

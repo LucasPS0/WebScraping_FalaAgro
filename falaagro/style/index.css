@@ -97,6 +97,7 @@
 .gridsecundario{
   display: grid;
   grid-gap: 20px;
+
 }
 .gridsecundario > .postagem{
   display: flex;

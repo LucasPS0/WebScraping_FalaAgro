@@ -2,13 +2,10 @@
     font-family: 'Space Grotesk', sans-serif;
 }
 
-
-* {
- 
-}
 .nav {
     flex-direction: row-reverse;
-    width: 100vw;
+    width: 90vw;
+    overflow-x: hidden;
 }
 
 
@@ -117,6 +114,22 @@ br
 
 .content-media-container {
     display: none;
+}
+
+.content-intertitle, 
+.content-blockquote,
+.content-text__container  {
+    padding: 0px 10px 0px 10px;
+    font-size: 1.1em;
+}
+
+.mc-column {
+    padding: 10px 15px 0px 15px;
+}
+
+.mini-related-articles__article-image {
+    margin: auto;
+
 }
 
 
