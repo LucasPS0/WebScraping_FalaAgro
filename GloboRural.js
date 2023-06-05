@@ -106,7 +106,7 @@ const client = new MongoClient(uri);
   insertData(dataGloboRural);
 
   // Agendamento para executar o scraping e inserção dos dados a cada 10 segundos
-  cron.schedule("*/10 * * * * *", async () => {
+  cron.schedule("0 */6 * * *", async () => {
     const newData = await scrapGloboRural();
     insertData(newData);
   });

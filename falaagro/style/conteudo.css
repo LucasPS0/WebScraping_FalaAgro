@@ -40,9 +40,11 @@
 
 
   
-  .back-link:hover {
+  .back-link:hover,
+  .back-link:hover strong {
     color: #555;
   }
+  
   
 
 
