@@ -14,7 +14,7 @@
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
-  margin: 160px auto;
+  margin: 50px auto;
 }
 
 
@@ -133,7 +133,6 @@
 .gridsecundario > .postagem > .conteudo > .fonte{
   font-size: 1.1em;
   font-family: 'Space Grotesk', sans-serif;
-  font-weight: bold;
 }
 
 .fade-out {
@@ -184,7 +183,7 @@
     display: block;
     grid-template-columns: 1fr 0fr 0fr ;
     grid-template-rows: 1fr 1fr 1fr;
-    margin: 100px auto;
+    margin: 20px auto;
   }
   .postprincipal:nth-child(n+3){
     grid-row: 1/4;
@@ -270,8 +269,7 @@ display: none;
 
   .gridsecundario > .postagem > .imgpost{
     width: 230px;
-    height: 150px;
-    padding: 5px;
+    height: 170px;
 
   }
 

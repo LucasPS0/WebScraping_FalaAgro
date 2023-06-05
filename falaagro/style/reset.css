@@ -12,9 +12,7 @@
     height: 120px;
     padding: 0 5%;
     border-bottom: solid 1px rgba(0, 0, 0, 0.25);
-    position: fixed;
-    z-index: 3;
-    width: 100vw;
+   
 }
 
 .nav > .logo > img{
@@ -26,8 +24,6 @@
 .nav > .search{
     display: flex;
     width: 300px;
-    right: 6em;
-    position: relative;
 }
 
 .nav > .search > input {
@@ -79,7 +75,7 @@
 
 .nav .search{
     display: flex;
-    right: 2em;
+
 
 }
 
