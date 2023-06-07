@@ -1,48 +1,44 @@
-
 /* TELA INTEIRA */
-.grid-container{
+.grid-container {
   display: flex;
   flex-direction: column;
   width: 90%;
   margin: auto;
 }
 
-
-
 /* CONTEUDO PRINCIPAL 3 GRIDS */
-.gridprincipal{
+.gridprincipal {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
-  margin: 50px auto;
+  margin: 150px auto 50px auto;
 }
 
-
-.postprincipal:nth-child(1){
+.postprincipal:nth-child(1) {
   grid-row: 3/1;
 }
 
-.postprincipal:nth-child(2){
+.postprincipal:nth-child(2) {
   grid-row: 1/2;
 }
 
-.postprincipal:nth-child(3){
+.postprincipal:nth-child(3) {
   grid-row: 2/3;
 }
 
 /* POST CONTEUDO PRINCIPAL */
-.postprincipal{
+.postprincipal {
   display: flex;
   flex-direction: column-reverse;
   cursor: pointer;
 }
 
-.postprincipal > .title{
+.postprincipal > .title {
   display: flex;
   position: absolute;
   align-items: flex-end;
   font-size: 1.5em;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: bold;
   width: 25.5%;
   height: 150px;
@@ -51,14 +47,11 @@
   color: white;
   border-radius: 20px;
   z-index: 2;
- 
 }
 
-
-.postprincipal:nth-child(n+2) > .image{
+.postprincipal:nth-child(n + 2) > .image {
   height: 245px;
 }
-
 
 .postprincipal > .image {
   height: 500px;
@@ -72,20 +65,22 @@
   left: 0;
   width: 100%;
   height: 200px; /* Defina a altura desejada para o gradiente */
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8)
+  );
   border-radius: 0 0 20px 20px;
 }
 
-
-
-.postprincipal:nth-child(1) > .image > img{
+.postprincipal:nth-child(1) > .image > img {
   width: 100%;
   height: 500px;
   object-fit: cover;
   border-radius: 20px;
 }
 
-.postprincipal:nth-child(n+2) > .image > img{
+.postprincipal:nth-child(n + 2) > .image > img {
   width: 100%;
   height: 245px;
   object-fit: cover;
@@ -94,18 +89,18 @@
 
 /* GRID POST SECUNDARIO */
 
-.gridsecundario{
+.gridsecundario {
   display: grid;
   grid-gap: 20px;
-
+  padding-bottom: 50px;
 }
-.gridsecundario > .postagem{
+.gridsecundario > .postagem {
   display: flex;
   flex-direction: row;
   cursor: pointer;
 }
 
-.gridsecundario > .postagem > .imgpost{
+.gridsecundario > .postagem > .imgpost {
   width: 250px;
   height: 200px;
   object-fit: cover;
@@ -113,7 +108,7 @@
   padding: 5px;
 }
 
-.gridsecundario > .postagem > .conteudo{
+.gridsecundario > .postagem > .conteudo {
   display: flex;
   flex-direction: column;
   padding-left: 20px;
@@ -122,19 +117,18 @@
   justify-content: space-around;
 }
 
-.gridsecundario > .postagem > .conteudo > .title{
+.gridsecundario > .postagem > .conteudo > .title {
   font-size: 1.5em;
   font-weight: 700;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
-.gridsecundario > .postagem > .conteudo > .sub{
+.gridsecundario > .postagem > .conteudo > .sub {
   font-size: 0.9em;
-  font-family: 'Space Grotesk', sans-serif;
-  
+  font-family: "Space Grotesk", sans-serif;
 }
-.gridsecundario > .postagem > .conteudo > .fonte{
+.gridsecundario > .postagem > .conteudo > .fonte {
   font-size: 1.1em;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: bold;
 }
 
@@ -152,142 +146,150 @@
   opacity: 1;
 }
 
-
 #logoAgro {
   cursor: pointer;
 }
 
+#btn-topo {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #92d500;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 15px;
+  width: 100px;
+  font-weight: 600;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+#btn-topo:hover {
+  background-color: #333; /* Mudar a cor de fundo quando passar o mouse sobre o botão */
+}
+
+
+
 /* Media querry */
 
-@media (max-width:900px) {
-  .grid-container{
+@media (max-width: 900px) {
+  .grid-container {
     width: 95%;
   }
-  .postprincipal > .title{
+  .postprincipal > .title {
     width: 46%;
-}
+  }
 
-.gridsecundario > .postagem > .imgpost{
-  min-width: 250px;
-  height: 200px;
-
-  
+  .gridsecundario > .postagem > .imgpost {
+    min-width: 250px;
+    height: 200px;
+  }
 }
-}
-
 
 /* MOBILE */
 
-@media (max-width:625px) {
-
-  .grid-container{
+@media (max-width: 625px) {
+  .grid-container {
     width: 98%;
+    padding-bottom: 100px;
   }
-  .gridprincipal{
+  .gridprincipal {
     display: block;
-    grid-template-columns: 1fr 0fr 0fr ;
+    grid-template-columns: 1fr 0fr 0fr;
     grid-template-rows: 1fr 1fr 1fr;
-    margin: 20px auto;
+    margin: 110px 0px 50px;
   }
-  .postprincipal:nth-child(n+3){
+  .postprincipal:nth-child(n + 3) {
     grid-row: 1/4;
   }
 
-.postprincipal:nth-child(n+1) > .image{
-  height: 150px;
-}
+  .postprincipal:nth-child(n + 1) > .image {
+    height: 150px;
+  }
 
-.postprincipal:nth-child(n+1) > .image > img{
-  width: 100%;
-  height: 150px;
-  border-radius: 10px;
-}
+  .postprincipal:nth-child(n + 1) > .image > img {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+  }
 
-.postprincipal > .title{
-  height: 0px;
-  color: black;
-  font-size: 5em;
-}
+  .postprincipal > .title {
+    height: 0px;
+    color: black;
+    font-size: 5em;
+  }
 
-.postprincipal:nth-child(n+1){
-  margin-bottom: 10px;
+  .postprincipal:nth-child(n + 1) {
+    margin-bottom: 10px;
     /* background-color: #d9d9d9; */
     margin: 0 auto;
     width: 90%;
     border-radius: 10px;
     height: 200px;
+  }
+
+  .postprincipal > .image::after {
+    display: none;
+  }
+
+  .postprincipal > .title {
+    position: relative;
+    align-items: flex-start;
+    font-size: 0.7em;
+    width: 100%;
+    height: 0px;
+    padding-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+  }
+
+  .gridsecundario > .postagem > .imgpost {
+    min-width: 150px;
+    height: 100px;
+  }
+
+  .gridsecundario > .postagem > .conteudo > .title {
+    font-size: 0.75em;
+  }
+  .gridsecundario > .postagem > .conteudo > .sub {
+    font-size: 0.55em;
+  }
+  .gridsecundario > .postagem > .conteudo > .fonte {
+    font-size: 0.55em;
+    font-weight: bold;
+    padding-top: 5px;
+  }
 }
 
 .postprincipal > .image::after {
-
-display: none;
-}
-
-
-
-
-.postprincipal > .title{
-  position: relative;
-  align-items: flex-start;
-  font-size: 0.7em;
-  width: 100%;
-  height: 0px;
-  padding-left: 5px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0));;
-}
-
-.gridsecundario > .postagem > .imgpost{
-  min-width: 150px;
-  height: 100px;
-  
-}
-
-
-
-.gridsecundario > .postagem > .conteudo > .title{
-  font-size: 0.75em;
-}
-.gridsecundario > .postagem > .conteudo > .sub{
-  font-size: 0.55em;
-}
-.gridsecundario > .postagem > .conteudo > .fonte{
-  font-size: 0.55em;
-  font-weight: bold;
-  padding-top: 5px;
-}
-}
-
-
-.postprincipal > .image::after {
-
-  height: 200px; 
+  height: 200px;
   border-radius: 10px;
 }
 
-
 /* MOBILE S */
 
-@media (max-width:420px) {
-
-  .gridsecundario > .postagem > .imgpost{
+@media (max-width: 420px) {
+  .gridsecundario > .postagem > .imgpost {
     width: 230px;
     height: 150px;
     padding: 5px;
-
   }
 
-  .gridsecundario > .postagem > .conteudo{
+  .gridsecundario > .postagem > .conteudo {
     padding-left: 8px;
     width: 100%;
-
   }
 
-  .gridsecundario{
+  .gridsecundario {
     display: grid;
     padding: 5px;
-    font-size: 1.8rem
+    font-size: 1.8rem;
   }
 
   .gridprincipal {
@@ -295,34 +297,30 @@ display: none;
     font-size: 1.3rem;
   }
 
-  .postprincipal:nth-child(n+1){
-  margin: 20px 20px 40px 20px;
+  .postprincipal:nth-child(n + 1) {
+    margin: 20px 20px 40px 20px;
   }
-  
-  .gridsecundario > .postagem > .conteudo > .title{
+
+  .gridsecundario > .postagem > .conteudo > .title {
     font-size: 0.5em;
   }
-  .gridsecundario > .postagem > .conteudo > .sub{
+  .gridsecundario > .postagem > .conteudo > .sub {
     font-size: 0.4em;
   }
-  .gridsecundario > .postagem > .conteudo > .fonte{
+  .gridsecundario > .postagem > .conteudo > .fonte {
     font-size: 0.4em;
   }
 }
 
-
-@media  (min-width: 1900px) {
+@media (min-width: 1900px) {
   .gridsecundario {
-   margin: 80px auto;
+    margin-top: 80px;
   }
+
+  .nav > .search {
+   
 }
-
-
-
-
-
-
-
+}
 
 /* main .grid {
     justify-content: center;

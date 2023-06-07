@@ -12,7 +12,7 @@
     <!-- Configuração do ícone da página -->
     <link
       rel="shortcut icon"
-      href="./img/icons/simbolo-falaagro-1.png"
+      href="./img/icons/Logo-FalaAgro_circular.png"
       type="image/x-icon"
     />
     <!-- Importação das fontes do Google Fonts -->
@@ -35,6 +35,7 @@
           src="./img/logo-falaagro-horizontal.png"
           alt="logo"
           id="logoAgro"
+          href="https://falaagro.com/links/"
         />
       </div>
       <div class="search">
@@ -47,22 +48,51 @@
       <article class="gridprincipal" id="containerPrincipal"></article>
       <article class="gridsecundario" id="posts"></article>
     </main>
+    <button id="btn-topo" onclick="topFunction()">Voltar ao topo</button>
 
     <script>
-    let debounceTimeout;
 
-searchInput.addEventListener("input", function (event) {
-  clearTimeout(debounceTimeout);
-  debounceTimeout = setTimeout(() => {
-    const searchTerm = searchInput.value;
-    if (searchTerm === '') {
-      location.reload();
-    } else {
-      searchNews(searchTerm);
-    }
-  }, 500); // Atraso de 500 milissegundos (ajuste conforme necessário)
+const logoElement = document.querySelector("#logoAgro");
+logoElement.addEventListener("click", function() {
+  window.location.href = "https://falaagro.com/links/";
 });
 
+
+
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("btn-topo").style.display = "block";
+        } else {
+          document.getElementById("btn-topo").style.display = "none";
+        }
+      }
+
+      // Quando o usuário clicar no botão, voltar ao topo da página
+      function topFunction() {
+        document.body.scrollTop = 0; // Para Safari
+        document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+      }
+
+      let debounceTimeout;
+
+      searchInput.addEventListener("input", function (event) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+          const searchTerm = searchInput.value;
+          if (searchTerm === "") {
+            location.reload();
+          } else {
+            searchNews(searchTerm);
+          }
+        }, 500); // Atraso de 500 milissegundos (ajuste conforme necessário)
+      });
 
       let currentPage = 0;
       const itemsPerPage = 10;
@@ -174,18 +204,15 @@ searchInput.addEventListener("input", function (event) {
             });
 
             setTimeout(() => {
-           
               postsContainer.innerHTML = "";
               containerPrincipal.innerHTML = "";
 
-
               if (data.length === 0) {
-  // Display message indicating no news was found
-  postsContainer.innerHTML = '<p style="padding:20px; font-family: \'Space Grotesk\', sans-serif; font-size: 2rem">Nenhuma notícia foi encontrada.</p>';
-  return;
-}
-
-
+                // Display message indicating no news was found
+                postsContainer.innerHTML =
+                  "<p style=\"padding:20px; font-family: 'Space Grotesk', sans-serif; font-size: 2rem\">Nenhuma notícia foi encontrada.</p>";
+                return;
+              }
 
               data.forEach((postData, index) => {
                 const post = document.createElement("div");
@@ -247,12 +274,14 @@ searchInput.addEventListener("input", function (event) {
         }
       });
 
-      const backLink = document.querySelector("#logoAgro");
+      let timeoutId;
 
-      backLink.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent the default link behavior
-        location.reload(); // Reload the page
+      window.addEventListener("touchmove", () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(fetchData, 2000);
       });
+
+  
     </script>
   </body>
 </html>

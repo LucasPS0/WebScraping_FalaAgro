@@ -5,7 +5,7 @@ const moment = require("moment");
 const cron = require("node-cron");
 
 const uri =
-  "mongodb+srv://lucaspsilva:35253030@courtneysdata.vjqs1cs.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb://falaagro:8Y05gUCLPt4kuT3WApG8Ev9Ah8TBAZvSC0GmCsQ4WchANuAzrfHQrzCUojEi6ZhtSklVAzYr2EEJACDbip4oZA==@falaagro.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@falaagro@";
 const client = new MongoClient(uri);
 
 (async () => {

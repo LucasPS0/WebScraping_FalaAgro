@@ -35,7 +35,29 @@
     </article>
 
 
+    <button id="btn-topo" onclick="topFunction()">Voltar ao topo</button>
+
+
 <script>
+
+
+// Quando o usuário rolar a página, mostrar o botão
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("btn-topo").style.display = "block";
+  } else {
+    document.getElementById("btn-topo").style.display = "none";
+  }
+}
+
+// Quando o usuário clicar no botão, voltar ao topo da página
+function topFunction() {
+  document.body.scrollTop = 0; // Para Safari
+  document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+}
+
     // Get the query parameter "id" to know which noticia to show
     const urlParams = new URLSearchParams(window.location.search);
     const noticiaId = urlParams.get('id');
