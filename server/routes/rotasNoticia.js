@@ -84,7 +84,7 @@ router.get("/resumo", addCacheControl, async (req, res) => {
 router.get("/search", addCacheControl, async (req, res) => {
   try {
     const searchTerm = req.query.term; // Obtém o termo de pesquisa dos parâmetros da consulta
-
+  
     // Remove acentuação do termo de pesquisa
     const searchTermWithoutAccents = searchTerm.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
@@ -97,7 +97,8 @@ router.get("/search", addCacheControl, async (req, res) => {
         { titulo: { $regex: regex, $options: "i" } }, // Pesquisa por título (ignorando maiúsculas e minúsculas)
         { resumo: { $regex: regex, $options: "i" } } // Pesquisa por resumo (ignorando maiúsculas e minúsculas)
       ]
-    });
+    })
+    .sort({ dataPublicacao: -1 }); // Ordena por dataPublicacao em ordem decrescente
 
     // Retorna as notícias encontradas como resposta
     res.status(200).json(noticias);
@@ -106,6 +107,7 @@ router.get("/search", addCacheControl, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 // Rota de leitura de notícia por ID
