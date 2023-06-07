@@ -16,8 +16,17 @@ function CheckToken(req, res, next) {
   next();
 }
 
+
+function addCacheControl(req, res, next) {
+  res.setHeader('Cache-Control', 'public, max-age=3600'); // Define o tempo máximo de cache para 1 hora (3600 segundos)
+  next();
+}
+
+
+
+
 // Rota de leitura de todas as notícias
-router.get("/", async (req, res) => {
+router.get("/", addCacheControl, async (req, res) => {
   // Configuração dos cabeçalhos de controle de acesso
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -37,7 +46,7 @@ router.get("/", async (req, res) => {
 });
 
 // Rota de leitura do resumo das notícias com paginação
-router.get("/resumo", async (req, res) => {
+router.get("/resumo", addCacheControl, async (req, res) => {
   // Configuração dos cabeçalhos de controle de acesso
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -72,7 +81,7 @@ router.get("/resumo", async (req, res) => {
 });
 
 // Rota de pesquisa de notícias por termo
-router.get("/search", async (req, res) => {
+router.get("/search", addCacheControl, async (req, res) => {
   try {
     const searchTerm = req.query.term; // Obtém o termo de pesquisa dos parâmetros da consulta
 
