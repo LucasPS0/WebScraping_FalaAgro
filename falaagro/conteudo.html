@@ -1,81 +1,143 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fala Agro | Produção de açúcar na China é a menor em 7 anos, diz relatório</title>
-    <link rel="shortcut icon" href="/img/icons/simbolo-falaagro-1.png" type="image/x-icon">
-    <link rel="stylesheet" href="./style/reset.css">
-    <link rel="stylesheet" href="./style/conteudo.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fala Agro</title>
     <link
       rel="shortcut icon"
-      href="./img/icons/simbolo-falaagro-1.png"
+      href="/img/icons/simbolo-falaagro-1.png"
       type="image/x-icon"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="./style/reset.css" />
+    <link rel="stylesheet" href="./style/conteudo.css" />
+    <link
+      rel="shortcut icon"
+      href="./img/icons/Logo-FalaAgro_circular.png"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style></style>
+  </head>
+  <body>
     <header class="nav">
-        <div class="logo">
-          <img src="./img/logo-falaagro-horizontal.png" alt="logo">
-        </div>
-        <a href="index.html" class="back-link"><strong>&lt;</strong> <p>Voltar</p></a>
-      </header>
+      <div class="logo">
+        <img src="./img/logo-falaagro-horizontal.png" alt="logo" />
+      </div>
+      <a href="index.html" class="back-link"
+        ><strong>&lt;</strong>
+        <p>Voltar</p></a
+      >
+    </header>
 
     <article class="principal">
-        <img id="imgPost">
-        <h1 id="article-title"></h1>
+      <img id="imgPost" />
+      <div class="buttons-container">
+        <button id="btn-ouvir" class="button">Ouvir Notícia</button>
+        <button id="btn-parar" class="button">Parar</button>
+      </div>
+      <h1 id="article-title"></h1>
     </article>
 
     <article class="post">
-        <div id="article-text">
+      <div id="article-text"></div>
     </article>
 
+    <!-- Container dos botões -->
 
     <button id="btn-topo" onclick="topFunction()">Voltar ao topo</button>
 
+    <script>
+      window.addEventListener("beforeunload", function (event) {
+        pararFala();
+      });
 
-<script>
+      var utterance; // Variável para armazenar a instância de fala
 
+      // Função para converter o texto em fala
+      function ouvirTexto() {
+        var titulo = document.getElementById("article-title").textContent;
+        var texto = document.getElementById("article-text").innerText;
 
-// Quando o usuário rolar a página, mostrar o botão
-window.onscroll = function() {scrollFunction()};
+        // Verifica se o navegador suporta a API de fala
+        if ("speechSynthesis" in window) {
+          utterance = new SpeechSynthesisUtterance();
+          utterance.text = titulo + " " + texto;
+          utterance.lang = "pt-BR";
+          // Pausa de 1 segundo após ler o título
+          utterance.onstart = function (event) {
+            setTimeout(function () {
+              utterance.pause();
+              // Continuar a reprodução após a pausa
+              utterance.resume();
+            }, 1000);
+          };
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("btn-topo").style.display = "block";
-  } else {
-    document.getElementById("btn-topo").style.display = "none";
-  }
-}
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Desculpe, seu navegador não suporta a API de fala.");
+        }
+      }
 
-// Quando o usuário clicar no botão, voltar ao topo da página
-function topFunction() {
-  document.body.scrollTop = 0; // Para Safari
-  document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
-}
+      // Função para parar a reprodução de fala
+      function pararFala() {
+        if (utterance) {
+          window.speechSynthesis.cancel();
+        }
+      }
 
-    // Get the query parameter "id" to know which noticia to show
-    const urlParams = new URLSearchParams(window.location.search);
-    const noticiaId = urlParams.get('id');
-        
-    // Make a request to the API to get the noticia with the given ID
-    fetch(`https://apifalaagro.onrender.com/noticia/${noticiaId}`)
-        .then(response => response.json())
-        .then(noticia => {
-        // Update the HTML elements with the noticia's title and text
-        const noticiaTitulo = document.getElementById('article-title');
-        const noticiaTexto = document.getElementById('article-text');
-        const img = document.getElementById('imgPost')
+      // Adicionar eventos aos botões
+      var btnOuvir = document.getElementById("btn-ouvir");
+      btnOuvir.addEventListener("click", ouvirTexto);
 
-        noticiaTitulo.textContent = noticia.titulo;
-        noticiaTexto.innerHTML = noticia.textoNoticia;
-        img.src = noticia.imagemCompleta;
+      var btnParar = document.getElementById("btn-parar");
+      btnParar.addEventListener("click", pararFala);
 
-    });
-</script>
-</body>
+      // Quando o usuário rolar a página, mostrar o botão
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("btn-topo").style.display = "block";
+        } else {
+          document.getElementById("btn-topo").style.display = "none";
+        }
+      }
+
+      // Quando o usuário clicar no botão, voltar ao topo da página
+      function topFunction() {
+        document.body.scrollTop = 0; // Para Safari
+        document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+      }
+
+      // Get the query parameter "id" to know which noticia to show
+      const urlParams = new URLSearchParams(window.location.search);
+      const noticiaId = urlParams.get("id");
+
+      // Make a request to the API to get the noticia with the given ID
+      fetch(`https://apifalaagro.onrender.com/noticia/${noticiaId}`)
+        .then((response) => response.json())
+        .then((noticia) => {
+          // Update the HTML elements with the noticia's title and text
+          const noticiaTitulo = document.getElementById("article-title");
+          const noticiaTexto = document.getElementById("article-text");
+          const img = document.getElementById("imgPost");
+
+          noticiaTitulo.textContent = noticia.titulo + ".";
+          noticiaTexto.innerHTML = noticia.textoNoticia;
+          img.src = noticia.imagemCompleta;
+        });
+    </script>
+  </body>
 </html>

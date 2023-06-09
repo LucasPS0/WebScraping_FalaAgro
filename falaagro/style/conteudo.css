@@ -8,6 +8,14 @@
     position: relative;
 }
 
+.nav > .logo > img {
+  width: 16vw;
+}
+
+
+
+
+
 .back-link {
   color: #333;
   text-decoration: none;
@@ -130,7 +138,7 @@ br {
 .content-blockquote,
 .content-text__container {
   padding: 0px 10px 0px 10px;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 .mc-column {
@@ -139,6 +147,28 @@ br {
 
 .mini-related-articles__article-image {
   margin: auto;
+}
+
+
+.buttons-container {
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: #45a049;
 }
 
 @media (max-width: 820px) {
@@ -169,9 +199,12 @@ br {
     width: 90%;
     object-fit: cover;
   }
-  .principal {
-  }
-
+  .nav > .logo {
+    margin: auto;
+    position: relative;
+    right: 10vw;
+    }
+    
   .post > #article-text > p > img {
     width: 310px !important;
     height: 400px !important;

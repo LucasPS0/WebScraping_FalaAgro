@@ -25,9 +25,9 @@
 
 .nav > .search {
   display: flex;
-  width: 150px;
-  position: relative;
-  right: 8em;
+    width: 150px;
+    position: relative;
+    right: 10.5vw;
 }
 
 .nav > .search > input {
@@ -81,9 +81,5 @@
     height: 20px;
   }
 
-  .nav > .logo {
-    display: flex;
-    justify-content: center;
-    width: 50vw;
-  }
+
 }
