@@ -3,6 +3,8 @@
 
 Este projeto é um web scraper que extrai notícias do site da Embrapa, GloboRural e CNA (em desenvolvimento), e armazena as informações em um banco de dados MongoDB. O scraper verifica se as notícias já existem no banco de dados e, se necessário, insere ou atualiza as informações. A função de scraping é executada a cada 6 horas usando a biblioteca node-cron.
 
+O site inclusive já está no ar e linkado no site da Empresa.  [FalaAgro](https://falaagro.com).
+
 **Requisitos**
 $$
 Node.js
